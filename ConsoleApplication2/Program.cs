@@ -11,24 +11,17 @@ namespace ConsoleApplication2
     {
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             Console.BufferHeight = 60;
             Console.BufferWidth = 200;
             Console.SetWindowSize(200, 60);
-            Console.SetCursorPosition(13, 13);
-            Console.ReadKey();
+     
 
-            Console.SetCursorPosition(5, 5);
-            Console.ForegroundColor = ConsoleColor.Blue;
-
-            Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Cyan;
-            //Console.BackgroundColor = ConsoleColor.DarkBlue;
             int OptionsCursorWidth = 0;
             int OptionsCursorHeigh = 0;
             Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh);
-            //OptionsCursorHeigh = OptionsCursorHeigh + 5;
-            //Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            //Console.SetCursorPosition(0, OptionsCursorHeigh++);
+
             Menu_class menu = new Menu_class();
             menu.show_menu(OptionsCursorHeigh);
             

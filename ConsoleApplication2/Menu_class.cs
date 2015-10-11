@@ -109,8 +109,8 @@ String any_key =
 "                                                                             __/ |            __/ |                                                     \n"+
 "                                                                            |___/            |___/                                                      \n";
 
-        //while (!KeysDown().Any())
-        //{
+         while (Console.ReadKey().Key != ConsoleKey.X)//!KeysDown().Any()//Console.ReadKey().Key!=ConsoleKey.Enter
+        {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(0, 10);
             Console.Write(snaaake);
@@ -118,10 +118,7 @@ String any_key =
             Console.SetCursorPosition(0, 45);
             Console.Write(any_key);
             
-            for (int i = 0; i < 200000000; i++)
-            {
-                
-            }
+            System.Threading.Thread.Sleep(900);
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(0, 10);
@@ -129,12 +126,11 @@ String any_key =
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(0, 45);
             //Console.Write(any_key);
-            for (int i = 0; i < 200000000; i++)
-            {
-
-            }
+            System.Threading.Thread.Sleep(900);
+            
             Console.Clear();
-       // }
+           
+        }
         
     }
     }
