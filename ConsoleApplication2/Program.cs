@@ -15,7 +15,6 @@ namespace ConsoleApplication2
             Console.BufferWidth = 200;
             Console.SetWindowSize(200, 60);
             Console.SetCursorPosition(13, 13);
-            Console.Write("Witam Studenta!");
             Console.ReadKey();
 
             Console.SetCursorPosition(5, 5);
@@ -24,12 +23,12 @@ namespace ConsoleApplication2
             Console.SetCursorPosition(0, 0);
             Console.ForegroundColor = ConsoleColor.Cyan;
             //Console.BackgroundColor = ConsoleColor.DarkBlue;
-            int OptionsCursorWidth = 20;
+            int OptionsCursorWidth = 0;
             int OptionsCursorHeigh = 0;
-            Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);//elo elo
-            OptionsCursorHeigh = OptionsCursorHeigh + 5;
-            Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.SetCursorPosition(0, OptionsCursorHeigh++);
+            Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh);
+            //OptionsCursorHeigh = OptionsCursorHeigh + 5;
+            //Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
+            //Console.SetCursorPosition(0, OptionsCursorHeigh++);
             Menu_class menu = new Menu_class();
             menu.show_menu(OptionsCursorHeigh);
             
