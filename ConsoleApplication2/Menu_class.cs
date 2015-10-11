@@ -59,7 +59,6 @@ namespace ConsoleApplication2
 "                                                         $$ | \\_/ $$ |\\$$$$$$  |\\$$$$$$  |$$$$$$\\ \\$$$$$$  |       $$$$$$  |$$ |      $$ |          \n" +
 "                                                         \\__|     \\__| \\______/  \\______/ \\______| \\______/        \\______/ \\__|      \\__|            \n";
             start_screen();
-            Console.ReadKey();
             OptionsCursorHeigh = 0;
             Console.SetCursorPosition(0, OptionsCursorHeigh + 5);
             Console.Write(start);
@@ -108,29 +107,24 @@ String any_key =
 "                                      \\_|  |_|  \\___||___/___/  \\__,_|_| |_|\\__, | |_|\\_\\___|\\__, |  \\__\\___/   \\___\\___/|_| |_|\\__|_|_| |_|\\__,_|\\___| \n"+
 "                                                                             __/ |            __/ |                                                     \n"+
 "                                                                            |___/            |___/                                                      \n";
-
-         while (Console.ReadKey().Key != ConsoleKey.X)//!KeysDown().Any()//Console.ReadKey().Key!=ConsoleKey.Enter
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.SetCursorPosition(0, 10);
-            Console.Write(snaaake);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(0, 45);
-            Console.Write(any_key);
-            
-            System.Threading.Thread.Sleep(900);
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.SetCursorPosition(0, 10);
-            Console.Write(snaaake);
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(0, 45);
-            //Console.Write(any_key);
-            System.Threading.Thread.Sleep(900);
-            
-            Console.Clear();
-           
-        }
+    while (! Console.KeyAvailable) {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.SetCursorPosition(0, 10);
+        Console.Write(snaaake);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.SetCursorPosition(0, 45);
+        Console.Write(any_key);
+        System.Threading.Thread.Sleep(1000);
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.SetCursorPosition(0, 10);
+        Console.Write(snaaake);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.SetCursorPosition(0, 45);
+        System.Threading.Thread.Sleep(700);
+        Console.Clear();
+   }
+    Console.ReadKey();
         
     }
     }
