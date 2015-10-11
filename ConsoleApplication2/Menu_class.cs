@@ -9,9 +9,7 @@ namespace ConsoleApplication2
 {
     class Menu_class
     {
-    public void show_menu(int OptionsCursorHeigh)
-        {
-             String start =
+        const String start =
 "                                                                              $$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$$$$$$\\ $$$$$$$$\\    \n" +
 "                                                                             $$  __$$\\ __$$  __|$$  __$$\\ $$  __$$\\__$$  __|      \n" +
 "                                                                             $$ /  \\__|  $$ |   $$ /  $$ |$$ |  $$ |  $$ |          \n" +
@@ -21,7 +19,7 @@ namespace ConsoleApplication2
 "                                                                             \\$$$$$$  |  $$ |   $$ |  $$ |$$ |  $$ |  $$ |      \n" +
 "                                                                              \\______/   \\__|   \\__|  \\__|\\__|  \\__|  \\__|      \n";
 
-            String scoreboard =
+        const String scoreboard =
 "                                                   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$$ /$$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$$  /$$$$$$$   \n" +
 "                                                  /$$__  $$ /$$__  $$ /$$__  $$| $$__  $$| $$_____/| $$__  $$ /$$__  $$ /$$__  $$| $$__  $$| $$__  $$      \n" +
 "                                                 | $$  \\__/| $$  \\__/| $$  \\ $$| $$  \\ $$| $$      | $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\ $$| $$  \\ $$      \n" +
@@ -30,7 +28,7 @@ namespace ConsoleApplication2
 "                                                  /$$  \\ $$| $$    $$| $$  | $$| $$  \\ $$| $$      | $$  \\ $$| $$  | $$| $$  | $$| $$  \\ $$| $$  | $$       \n" +
 "                                                 |  $$$$$$/|  $$$$$$/|  $$$$$$/| $$  | $$| $$$$$$$$| $$$$$$$/|  $$$$$$/| $$  | $$| $$  | $$| $$$$$$$/          \n" +
 "                                                  \\______/  \\______/  \\______/ |__/  |__/|________/|_______/  \\______/ |__/  |__/|__/  |__/|_______/         \n";
-            String exit =
+        const String exit =
 "                                                         $$$$$$$\\  $$\\   $$\\ $$$$$$\\ $$$$$$$$\\        $$$$$$\\   $$$$$$\\  $$\\      $$\\ $$$$$$$$\\       \n" +
 "                                                         $$  __$$\\ $$ |  $$ |\\_$$  _|\\__$$  __|      $$  __$$\\ $$  __$$\\ $$$\\    $$$ |$$  _____|      \n" +
 "                                                         $$ /  $$ |$$ |  $$ |  $$ |     $$ |         $$ /  \\__|$$ /  $$ |$$$$\\  $$$$ |$$ |            \n" +
@@ -40,7 +38,7 @@ namespace ConsoleApplication2
 "                                                         \\$$$$$$ / \\$$$$$$  |$$$$$$\\    $$ |         \\$$$$$$  |$$ |  $$ |$$ | \\_/ $$ |$$$$$$$$\\       \n" +
 "                                                          \\___$$$\\  \\______/ \\______|   \\__|          \\______/ \\__|  \\__|\\__|     \\__|\\________|      \n" +
 "                                                              \\___|                                                                                   \n";
-            String music_ON =
+        const String music_ON =
 "                                                         $$\\      $$\\ $$\\   $$\\  $$$$$$\\  $$$$$$\\  $$$$$$\\         $$$$$$\\  $$\\   $$\\        \n" +
 "                                                         $$$\\    $$$ |$$ |  $$ |$$  __$$\\ \\_$$  _|$$  __$$\\       $$  __$$\\ $$$\\  $$ |       \n" +
 "                                                         $$$$\\  $$$$ |$$ |  $$ |$$ /  \\__|  $$ |  $$ /  \\__|      $$ /  $$ |$$$$\\ $$ |      \n" +
@@ -49,7 +47,7 @@ namespace ConsoleApplication2
 "                                                         $$ |\\$  /$$ |$$ |  $$ |$$\\   $$ |  $$ |  $$ |  $$\\       $$ |  $$ |$$ |\\$$$ |       \n" +
 "                                                         $$ | \\_/ $$ |\\$$$$$$  |\\$$$$$$  |$$$$$$\\ \\$$$$$$  |       $$$$$$  |$$ | \\$$ |       \n" +
 "                                                         \\__|     \\__| \\______/  \\______/ \\______| \\______/        \\______/ \\__|  \\__|        \n";
-            String music_OFF =
+        const String music_OFF =
 "                                                         $$\\      $$\\ $$\\   $$\\  $$$$$$\\  $$$$$$\\  $$$$$$\\         $$$$$$\\  $$$$$$$$\\ $$$$$$$$\\     \n" +
 "                                                         $$$\\    $$$ |$$ |  $$ |$$  __$$\\ \\_$$  _|$$  __$$\\       $$  __$$\\ $$  _____|$$  _____| \n" +
 "                                                         $$$$\\  $$$$ |$$ |  $$ |$$ /  \\__|  $$ |  $$ /  \\__|      $$ /  $$ |$$ |      $$ |         \n" +
@@ -58,25 +56,67 @@ namespace ConsoleApplication2
 "                                                         $$ |\\$  /$$ |$$ |  $$ |$$\\   $$ |  $$ |  $$ |  $$\\       $$ |  $$ |$$ |      $$ |         \n" +
 "                                                         $$ | \\_/ $$ |\\$$$$$$  |\\$$$$$$  |$$$$$$\\ \\$$$$$$  |       $$$$$$  |$$ |      $$ |          \n" +
 "                                                         \\__|     \\__| \\______/  \\______/ \\______| \\______/        \\______/ \\__|      \\__|            \n";
-            start_screen();
-            OptionsCursorHeigh = 0;
-            Console.SetCursorPosition(0, OptionsCursorHeigh + 5);
+
+        private void reset_menu()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(0, 5);
             Console.Write(start);
-            Console.SetCursorPosition(0, OptionsCursorHeigh + 20);
+            Console.SetCursorPosition(0, 20);
             Console.Write(music_OFF);
-            Console.SetCursorPosition(0, OptionsCursorHeigh + 30);
+            Console.SetCursorPosition(0, 30);
             Console.Write(scoreboard);
-            Console.SetCursorPosition(0, OptionsCursorHeigh + 40);
+            Console.SetCursorPosition(0, 40);
             Console.Write(exit);
         }
-    public static IEnumerable<Key> KeysDown()
-    {
-        foreach (Key key in Enum.GetValues(typeof(Key)))
+        public void highlight_menu(int position)
         {
-            if (Keyboard.IsKeyDown(key))
-                yield return key;
+            switch (position)
+            {
+                case 1:
+                    reset_menu();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(0, 5);
+                    Console.Write(start);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                case 2:
+                    reset_menu();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(0, 20);
+                    Console.Write(music_OFF);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                case 3:
+                    reset_menu();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(0, 30);
+                    Console.Write(scoreboard);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                case 4:
+                    reset_menu();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.SetCursorPosition(0, 40);
+                    Console.Write(exit);
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+
+            }
         }
-    }
+    public void show_menu()
+        {
+            start_screen();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(0, 5);
+            Console.Write(start);
+            Console.SetCursorPosition(0, 20);
+            Console.Write(music_OFF);
+            Console.SetCursorPosition(0, 30);
+            Console.Write(scoreboard);
+            Console.SetCursorPosition(0, 40);
+            Console.Write(exit);
+        }
         private void start_screen()
     { 
         String snaaake =
@@ -124,6 +164,15 @@ String any_key =
         System.Threading.Thread.Sleep(700);
         Console.Clear();
    }
+    reset_menu();
+    Console.ReadKey();
+    highlight_menu(1);
+    Console.ReadKey();
+    highlight_menu(2);
+    Console.ReadKey();
+    highlight_menu(3);
+    Console.ReadKey();
+    highlight_menu(4);
     Console.ReadKey();
         
     }

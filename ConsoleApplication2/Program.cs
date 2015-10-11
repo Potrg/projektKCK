@@ -23,7 +23,7 @@ namespace ConsoleApplication2
             Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh);
 
             Menu_class menu = new Menu_class();
-            menu.show_menu(OptionsCursorHeigh);
+            menu.show_menu();
             
             Console.ReadKey();
         }
