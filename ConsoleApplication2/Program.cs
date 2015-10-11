@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ConsoleApplication2;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication1
+namespace ConsoleApplication2
 {
     class Program
     {
@@ -25,22 +26,13 @@ namespace ConsoleApplication1
             //Console.BackgroundColor = ConsoleColor.DarkBlue;
             int OptionsCursorWidth = 20;
             int OptionsCursorHeigh = 0;
-
-
             Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);//elo elo
-
-
-
             OptionsCursorHeigh = OptionsCursorHeigh + 5;
             Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write("  /$$$$$$  /$$$$$$$  /$$$$$$$$ /$$$$$$  /$$$$$$  /$$   /$$  /$$$$$$ \n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write(" /$$__  $$| $$__  $$|__  $$__/|_  $$_/ /$$__  $$| $$$ | $$ /$$__  $$\n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write("| $$  \\ $$| $$  \\ $$   | $$     | $$  | $$  \\ $$| $$$$| $$| $$  \\__/\n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write("| $$  | $$| $$$$$$$/   | $$     | $$  | $$  | $$| $$ $$ $$|  $$$$$$ \n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write("| $$  | $$| $$____/    | $$     | $$  | $$  | $$| $$  $$$$ \\____  $$\n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write("| $$  | $$| $$         | $$     | $$  | $$  | $$| $$\\  $$$ /$$  \\ $$\n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write("|  $$$$$$/| $$         | $$    /$$$$$$|  $$$$$$/| $$ \\  $$|  $$$$$$/\n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
-            Console.Write(" \\______/ |__/         |__/   |______/ \\______/ |__/  \\__/ \\______/\n"); Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh++);
+            Console.SetCursorPosition(0, OptionsCursorHeigh++);
+            Menu_class menu = new Menu_class();
+            menu.show_menu(OptionsCursorHeigh);
+            
             Console.ReadKey();
         }
     }
