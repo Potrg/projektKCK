@@ -195,7 +195,7 @@ String any_key =
         }
         private void menu_conroler()
         {
-            bool muzik = true;
+            bool muzik = true;// Kontolka do napisów a także do wyłączania muzyki 
             while (true)
             {
                 ConsoleKeyInfo kb = Console.ReadKey(true); //read the keyboard
@@ -248,6 +248,10 @@ String any_key =
                                     break;
                             }
                             break;
+                        case ConsoleKey.Enter:
+
+
+                            break;
                     }
                 } while (kb.Key != ConsoleKey.Enter);
                 
@@ -262,7 +266,7 @@ String any_key =
                         {
                             Console.Clear();
                             highlight_menu(2, muzik);
-                            muzik = true;
+                            muzik = true;// wlacz wlacz dzwieki + zmiana stanu DODAC FUNKCJE WYLACZENIA DZWIEKOW
                         }
                         else if ((kb.Key == ConsoleKey.Enter) && (muzik == true))
                         {
@@ -270,12 +274,8 @@ String any_key =
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.SetCursorPosition(0, 20);
                             Console.Write(music_OFF);
-                            muzik = false;
+                            muzik = false;// wylacz wlacz dzwieki + zmiana stanu
                         }
-                        
-
-                        // wylacz wlacz dzwieki + zmiana stanu 
-
                         break;
                     case 2:
                         //odpal tablice wynikow
