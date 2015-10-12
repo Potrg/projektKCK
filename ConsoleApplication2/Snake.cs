@@ -8,6 +8,9 @@ namespace ConsoleApplication2
 {
     class Snake
     {
+        int dlugosc;
+        int punkty;
+
         //Kurde coś tu trzeba pisać xD
     }
 }
