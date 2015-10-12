@@ -58,45 +58,58 @@ namespace ConsoleApplication2
 "                                                         $$ | \\_/ $$ |\\$$$$$$  |\\$$$$$$  |$$$$$$\\ \\$$$$$$  |       $$$$$$  |$$ |      $$ |          \n" +
 "                                                         \\__|     \\__| \\______/  \\______/ \\______| \\______/        \\______/ \\__|      \\__|            \n";
 
-        private void reset_menu()
+        private void reset_menu(bool muzik)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(0, 5);
             Console.Write(start);
+            ClearCurrentConsoleLine(20);
             Console.SetCursorPosition(0, 20);
-            Console.Write(music_OFF);
+            if (muzik == true)
+            {
+                Console.Write(music_ON);
+            }
+            else
+                Console.Write(music_OFF);
             Console.SetCursorPosition(0, 30);
             Console.Write(scoreboard);
             Console.SetCursorPosition(0, 40);
             Console.Write(exit);
         }
-        public void highlight_menu(int position)
+        public void highlight_menu(int position,bool muzik)
         {
             switch (position)
             {
                 case 0:
-                    reset_menu();
+                    reset_menu(muzik);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 5);
                     Console.Write(start);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
                 case 1:
-                    reset_menu();
+                    reset_menu(muzik);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 20);
-                    Console.Write(music_OFF);
+                    ClearCurrentConsoleLine(20);
+                    Console.SetCursorPosition(0, 20);
+                    if (muzik==true)
+                    {
+                        Console.Write(music_ON);
+                    }
+                    else
+                        Console.Write(music_OFF);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
                 case 2:
-                    reset_menu();
+                    reset_menu(muzik);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 30);
                     Console.Write(scoreboard);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
                 case 3:
-                    reset_menu();
+                    reset_menu(muzik);
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 40);
                     Console.Write(exit);
@@ -165,82 +178,116 @@ String any_key =
         System.Threading.Thread.Sleep(700);
         Console.Clear();
    }
-    reset_menu();
-    highlight_menu(0);
+    reset_menu(true);
+    highlight_menu(0,true);
     menu_conroler();
 
         
     }
+        public static void ClearCurrentConsoleLine(int currentLineCursor)
+        {
+            for (int i = currentLineCursor; i < currentLineCursor+8; i++)
+			{
+			 Console.SetCursorPosition(0, i);
+             Console.Write(new string(' ', Console.WindowWidth+50));
+			}
+            
+        }
         private void menu_conroler()
         {
-            ConsoleKeyInfo kb = Console.ReadKey(true); //read the keyboard
-        do{
-            kb = Console.ReadKey(true); //read the keyboard
-            switch (kb.Key)
-            { //react to input
-                case ConsoleKey.UpArrow:
-                    switch (menu_state)
-                    {
-                        case 0:
-                            highlight_menu(3);
-                            menu_state = ((4+menu_state - 1) % 4);
+            bool muzik = true;
+            while (true)
+            {
+                ConsoleKeyInfo kb = Console.ReadKey(true); //read the keyboard
+                do
+                {
+                    kb = Console.ReadKey(true); //read the keyboard
+                    switch (kb.Key)
+                    { //react to input
+                        case ConsoleKey.UpArrow:
+                            switch (menu_state)
+                            {
+                                case 0:
+                                    highlight_menu(3,muzik);
+                                    menu_state = ((4 + menu_state - 1) % 4);
+                                    break;
+                                case 1:
+                                    highlight_menu(0, muzik);
+                                    menu_state = ((4 + menu_state - 1) % 4);
+                                    break;
+                                case 2:
+                                    highlight_menu(1, muzik);
+                                    menu_state = ((4 + menu_state - 1) % 4);
+                                    break;
+                                case 3:
+                                    highlight_menu(2, muzik);
+                                    menu_state = ((4 + menu_state - 1) % 4);
+                                    break;
+                            }
                             break;
-                        case 1:
-                            highlight_menu(0);
-                            menu_state = ((4+menu_state - 1) % 4);
-                            break;
-                        case 2:
-                            highlight_menu(1);
-                            menu_state = ((4+menu_state - 1) % 4);
-                            break;
-                        case 3:
-                            highlight_menu(2);
-                            menu_state = ((4+menu_state  - 1) % 4);
+
+                        case ConsoleKey.DownArrow:
+
+                            switch (menu_state)
+                            {
+                                case 0:
+                                    highlight_menu(1, muzik);
+                                    menu_state = ((menu_state + 1) % 4);
+                                    break;
+                                case 1:
+                                    highlight_menu(2, muzik);
+                                    menu_state = ((menu_state + 1) % 4);
+                                    break;
+                                case 2:
+                                    highlight_menu(3, muzik);
+                                    menu_state = ((menu_state + 1) % 4);
+                                    break;
+                                case 3:
+                                    highlight_menu(0, muzik);
+                                    menu_state = ((menu_state + 1) % 4);
+                                    break;
+                            }
                             break;
                     }
-                    break;
+                } while (kb.Key != ConsoleKey.Enter);
+                
 
-                case ConsoleKey.DownArrow:
+                switch (menu_state)
+                {
+                    case 0:
+                        // odpal gre
+                        break;
+                    case 1:
+                        if ((kb.Key == ConsoleKey.Enter) && (muzik == false))
+                        {
+                            Console.Clear();
+                            highlight_menu(2, muzik);
+                            muzik = true;
+                        }
+                        else if ((kb.Key == ConsoleKey.Enter) && (muzik == true))
+                        {
+                            ClearCurrentConsoleLine(20);
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.SetCursorPosition(0, 20);
+                            Console.Write(music_OFF);
+                            muzik = false;
+                        }
+                        
 
-                    switch (menu_state)
-                    {
-                        case 0:
-                            highlight_menu(1);
-                            menu_state = ((menu_state + 1) % 4);
-                            break;
-                        case 1:
-                            highlight_menu(2);
-                            menu_state = ((menu_state + 1) % 4);
-                            break;
-                        case 2:
-                            highlight_menu(3);
-                            menu_state = ((menu_state + 1) % 4);
-                            break;
-                        case 3:
-                            highlight_menu(0);
-                            menu_state = ((menu_state + 1) % 4);
-                            break;
-                    }
-                    break;
+                        // wylacz wlacz dzwieki + zmiana stanu 
+
+                        break;
+                    case 2:
+                        //odpal tablice wynikow
+                        break;
+                    case 3:
+                        Environment.Exit(0);
+                        //wyłącz grę odpal napisy koncowe
+                        break;
+                }
             }
-        } while (kb.Key!=ConsoleKey.Enter);
 
-       switch(menu_state)
-       {
-           case 0:
-               // odpal gre
-               break;
-           case 1:
-               // wylacz wlacz dzwieki + zmiana stanu 
-               break;
-           case 2:
-               //odpal tablice wynikow
-               break;
-           case 3:
-               Environment.Exit(0);
-               //wyłącz grę odpal napisy koncowe
-               break;
-       }
+          
             Console.ReadKey();
         }
     }
