@@ -198,10 +198,11 @@ String any_key =
             bool muzik = true;// Kontolka do napisów a także do wyłączania muzyki 
             while (true)
             {
-                ConsoleKeyInfo kb = Console.ReadKey(true); //read the keyboard
+                ConsoleKeyInfo kb;
+                //kb = Console.ReadKey(true); //read the keyboard
                 do
                 {
-                    kb = Console.ReadKey(true); //read the keyboard
+                    kb = Console.ReadKey(false); //read the keyboard
                     switch (kb.Key)
                     { //react to input
                         case ConsoleKey.UpArrow:
@@ -249,42 +250,44 @@ String any_key =
                             }
                             break;
                         case ConsoleKey.Enter:
-
+                            switch (menu_state)
+                            {
+                                case 0:
+                                    // odpal gre
+                                    break;
+                                case 1:
+                                    if ((kb.Key == ConsoleKey.Enter) && (muzik == false))
+                                    {
+                                        muzik = true;// wlacz wlacz dzwieki + zmiana stanu DODAC FUNKCJE WYLACZENIA DZWIEKOW
+                                        Console.Clear();
+                                        highlight_menu(1, muzik);
+                                        
+                                    }
+                                    else if ((kb.Key == ConsoleKey.Enter) && (muzik == true))
+                                    {
+                                        muzik = false;// wylacz wlacz dzwieki + zmiana stanu
+                                        ClearCurrentConsoleLine(20);
+                                        Console.ForegroundColor = ConsoleColor.Red;
+                                        Console.SetCursorPosition(0, 20);
+                                        Console.Write(music_OFF);
+                                       
+                                    }
+                                    break;
+                                case 2:
+                                    //odpal tablice wynikow
+                                    break;
+                                case 3:
+                                    Environment.Exit(0);
+                                    //wyłącz grę odpal napisy koncowe
+                                    break;
+                            }
 
                             break;
                     }
                 } while (kb.Key != ConsoleKey.Enter);
                 
 
-                switch (menu_state)
-                {
-                    case 0:
-                        // odpal gre
-                        break;
-                    case 1:
-                        if ((kb.Key == ConsoleKey.Enter) && (muzik == false))
-                        {
-                            Console.Clear();
-                            highlight_menu(2, muzik);
-                            muzik = true;// wlacz wlacz dzwieki + zmiana stanu DODAC FUNKCJE WYLACZENIA DZWIEKOW
-                        }
-                        else if ((kb.Key == ConsoleKey.Enter) && (muzik == true))
-                        {
-                            ClearCurrentConsoleLine(20);
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.SetCursorPosition(0, 20);
-                            Console.Write(music_OFF);
-                            muzik = false;// wylacz wlacz dzwieki + zmiana stanu
-                        }
-                        break;
-                    case 2:
-                        //odpal tablice wynikow
-                        break;
-                    case 3:
-                        Environment.Exit(0);
-                        //wyłącz grę odpal napisy koncowe
-                        break;
-                }
+                
             }
 
           
