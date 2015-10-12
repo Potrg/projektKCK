@@ -9,6 +9,7 @@ namespace ConsoleApplication2
 {
     class Menu_class
     {
+        int menu_state = 0;
         const String start =
 "                                                                              $$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$$$$$$\\ $$$$$$$$\\    \n" +
 "                                                                             $$  __$$\\ __$$  __|$$  __$$\\ $$  __$$\\__$$  __|      \n" +
@@ -73,28 +74,28 @@ namespace ConsoleApplication2
         {
             switch (position)
             {
-                case 1:
+                case 0:
                     reset_menu();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 5);
                     Console.Write(start);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
-                case 2:
+                case 1:
                     reset_menu();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 20);
                     Console.Write(music_OFF);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
-                case 3:
+                case 2:
                     reset_menu();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 30);
                     Console.Write(scoreboard);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
-                case 4:
+                case 3:
                     reset_menu();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.SetCursorPosition(0, 40);
@@ -165,17 +166,83 @@ String any_key =
         Console.Clear();
    }
     reset_menu();
-    Console.ReadKey();
-    highlight_menu(1);
-    Console.ReadKey();
-    highlight_menu(2);
-    Console.ReadKey();
-    highlight_menu(3);
-    Console.ReadKey();
-    highlight_menu(4);
-    Console.ReadKey();
+    highlight_menu(0);
+    menu_conroler();
+
         
     }
+        private void menu_conroler()
+        {
+            ConsoleKeyInfo kb = Console.ReadKey(true); //read the keyboard
+        do{
+            kb = Console.ReadKey(true); //read the keyboard
+            switch (kb.Key)
+            { //react to input
+                case ConsoleKey.UpArrow:
+                    switch (menu_state)
+                    {
+                        case 0:
+                            highlight_menu(3);
+                            menu_state = ((4+menu_state - 1) % 4);
+                            break;
+                        case 1:
+                            highlight_menu(0);
+                            menu_state = ((4+menu_state - 1) % 4);
+                            break;
+                        case 2:
+                            highlight_menu(1);
+                            menu_state = ((4+menu_state - 1) % 4);
+                            break;
+                        case 3:
+                            highlight_menu(2);
+                            menu_state = ((4+menu_state  - 1) % 4);
+                            break;
+                    }
+                    break;
+
+                case ConsoleKey.DownArrow:
+
+                    switch (menu_state)
+                    {
+                        case 0:
+                            highlight_menu(1);
+                            menu_state = ((menu_state + 1) % 4);
+                            break;
+                        case 1:
+                            highlight_menu(2);
+                            menu_state = ((menu_state + 1) % 4);
+                            break;
+                        case 2:
+                            highlight_menu(3);
+                            menu_state = ((menu_state + 1) % 4);
+                            break;
+                        case 3:
+                            highlight_menu(0);
+                            menu_state = ((menu_state + 1) % 4);
+                            break;
+                    }
+                    break;
+            }
+        } while (kb.Key!=ConsoleKey.Enter);
+
+       switch(menu_state)
+       {
+           case 0:
+               // odpal gre
+               break;
+           case 1:
+               // wylacz wlacz dzwieki + zmiana stanu 
+               break;
+           case 2:
+               //odpal tablice wynikow
+               break;
+           case 3:
+               Environment.Exit(0);
+               //wyłącz grę odpal napisy koncowe
+               break;
+       }
+            Console.ReadKey();
+        }
     }
 }
 

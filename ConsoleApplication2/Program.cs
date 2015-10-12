@@ -15,13 +15,8 @@ namespace ConsoleApplication2
             Console.BufferHeight = 60;
             Console.BufferWidth = 200;
             Console.SetWindowSize(200, 60);
-     
-
             Console.ForegroundColor = ConsoleColor.Cyan;
-            int OptionsCursorWidth = 0;
-            int OptionsCursorHeigh = 0;
-            Console.SetCursorPosition(OptionsCursorWidth, OptionsCursorHeigh);
-
+            Console.SetCursorPosition(0, 0);
             Menu_class menu = new Menu_class();
             menu.show_menu();
             
