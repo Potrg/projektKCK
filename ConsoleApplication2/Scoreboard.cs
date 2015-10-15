@@ -97,6 +97,7 @@ namespace ConsoleApplication2
                 Console.WriteLine(SortedList[i].score);
             }
             voffset = 29;
+            File.Delete(path);
             zapisz();
 
                 ConsoleKeyInfo kb;
