@@ -262,6 +262,7 @@ while (!oThread.IsAlive) ;
         //System.Threading.Thread.Sleep(700);
         //Console.Clear();
    }
+    Console.ReadKey(false);
     oThread.Abort();
     oThread.Join();
     Console.Clear();
