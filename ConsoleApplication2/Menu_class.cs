@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -243,19 +244,27 @@ String any_key =
 "                                           \\_|  |_|  \\___||___/___/  \\__,_|_| |_|\\__, | |_|\\_\\___|\\__, |  \\__\\___/   \\___\\___/|_| |_|\\__|_|_| |_|\\__,_|\\___| \n" +
 "                                                                                  __/ |            __/ |                                                     \n" +
 "                                                                                 |___/            |___/                                                      \n";
+colorfull_snake();
+Startscreen tekstmigotajacy = new Startscreen();
+Thread oThread = new Thread(new ThreadStart(tekstmigotajacy.start_screen));
+oThread.Start();
+while (!oThread.IsAlive) ;
     while (! Console.KeyAvailable) {
-        colorfull_snake();
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.SetCursorPosition(0, 40);
-        Console.Write(any_key);
-        System.Threading.Thread.Sleep(1000);
-        Console.Clear();
-        colorfull_snake();
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.SetCursorPosition(0, 40);
-        System.Threading.Thread.Sleep(700);
-        Console.Clear();
+
+        //Console.ForegroundColor = ConsoleColor.Red;
+        //Console.SetCursorPosition(0, 40);
+        //Console.Write(any_key);
+        //System.Threading.Thread.Sleep(1000);
+        //Console.Clear();
+        //colorfull_snake();
+        //Console.ForegroundColor = ConsoleColor.Red;
+        ///Console.SetCursorPosition(0, 40);
+        //System.Threading.Thread.Sleep(700);
+        //Console.Clear();
    }
+    oThread.Abort();
+    oThread.Join();
+    Console.Clear();
     reset_menu(true);
     highlight_menu(0,true);
     menu_conroler();
@@ -277,10 +286,9 @@ String any_key =
             while (true)
             {
                 ConsoleKeyInfo kb;
-                //kb = Console.ReadKey(true); //read the keyboard
-                do
+                while (true)
                 {
-                    kb = Console.ReadKey(false); //read the keyboard
+                    kb = Console.ReadKey(false);
                     switch (kb.Key)
                     { //react to input
                         case ConsoleKey.UpArrow:
@@ -333,7 +341,6 @@ String any_key =
                                 case 0:
                                     GameViewer view = new GameViewer();
                                     view.wyswietl_wynik(0987651234);
-                                    System.Threading.Thread.Sleep(1000);
                                     view.wyswietl_wynik(35489);
                                     Console.ReadKey();
                                     break;
@@ -366,7 +373,7 @@ String any_key =
 
                             break;
                     }
-                } while (kb.Key != ConsoleKey.Enter);
+                }
                 
 
                 

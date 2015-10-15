@@ -147,8 +147,7 @@ namespace ConsoleApplication2
                         break;
                 }
             }
-
-
+            Console.ResetColor();
         }
     }
 }
