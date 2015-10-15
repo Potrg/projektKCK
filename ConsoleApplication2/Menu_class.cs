@@ -236,7 +236,7 @@ namespace ConsoleApplication2
         private void start_screen()
     {
 
-falsh tekstmigotajacy = new falsh();
+flash tekstmigotajacy = new flash();
 Thread oThread = new Thread(new ThreadStart(tekstmigotajacy.start_screen));
 colorfull_snake();
 oThread.Start();

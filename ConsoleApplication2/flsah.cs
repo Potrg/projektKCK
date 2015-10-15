@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication2
 {
-    class falsh
+    class flash
     {
         public static void ClearCurrentConsoleLine(int currentLineCursor)
         {
