@@ -11,8 +11,6 @@ namespace ConsoleApplication2
     {
         private void rysuj_wynik(int liczba, int hOffset, int vOffset)
         {
-            Console.BackgroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(hOffset, vOffset++);
             switch (liczba)
             {
@@ -97,17 +95,19 @@ namespace ConsoleApplication2
         }
         public static void ClearCurrentConsoleLine(int currentLineCursor)
         {
-            for (int i = currentLineCursor; i < currentLineCursor + 8; i++)
+            for (int i = currentLineCursor; i < currentLineCursor + 6; i++)
             {
                 Console.SetCursorPosition(0, i);
-                Console.Write(new string(' ', Console.WindowWidth + 50));
+                Console.Write(new string(' ', 200));
             }
         }
         public void wyswietl_wynik(int wynik)
         {
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
+            Console.ForegroundColor = ConsoleColor.Red;
             ClearCurrentConsoleLine(0);
             int hOffset=200;
-            int vOffset=2;
+            int vOffset=0;
             string wynik_elo = Convert.ToString(wynik);
             for (int i = wynik_elo.Length-1; i >= 0;i-- )
             {
