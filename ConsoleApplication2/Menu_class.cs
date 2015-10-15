@@ -233,26 +233,15 @@ namespace ConsoleApplication2
     
     }
         private void start_screen()
-    { 
-colorfull_snake();
-Startscreen tekstmigotajacy = new Startscreen();
+    {
+
+falsh tekstmigotajacy = new falsh();
 Thread oThread = new Thread(new ThreadStart(tekstmigotajacy.start_screen));
+colorfull_snake();
 oThread.Start();
 while (!oThread.IsAlive) ;
-    while (! Console.KeyAvailable) {
 
-        //Console.ForegroundColor = ConsoleColor.Red;
-        //Console.SetCursorPosition(0, 40);
-        //Console.Write(any_key);
-        //System.Threading.Thread.Sleep(1000);
-        //Console.Clear();
-        //colorfull_snake();
-        //Console.ForegroundColor = ConsoleColor.Red;
-        ///Console.SetCursorPosition(0, 40);
-        //System.Threading.Thread.Sleep(700);
-        //Console.Clear();
-   }
-    Console.ReadKey(false);
+    while (! Console.KeyAvailable) {}Console.ReadKey(false);
     oThread.Abort();
     oThread.Join();
     Console.Clear();
