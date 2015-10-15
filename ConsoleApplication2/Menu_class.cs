@@ -244,7 +244,6 @@ String any_key =
 "                                                                                  __/ |            __/ |                                                     \n" +
 "                                                                                 |___/            |___/                                                      \n";
     while (! Console.KeyAvailable) {
-        //Console.Write(snaaake);
         colorfull_snake();
         Console.ForegroundColor = ConsoleColor.Red;
         Console.SetCursorPosition(0, 40);
@@ -332,7 +331,11 @@ String any_key =
                             switch (menu_state)
                             {
                                 case 0:
-                                    // odpal gre
+                                    GameViewer view = new GameViewer();
+                                    view.wyswietl_wynik(0987651234);
+                                    System.Threading.Thread.Sleep(1000);
+                                    view.wyswietl_wynik(35489);
+                                    Console.ReadKey();
                                     break;
                                 case 1:
                                     if ((kb.Key == ConsoleKey.Enter) && (muzik == false))
@@ -368,9 +371,6 @@ String any_key =
 
                 
             }
-
-          
-            Console.ReadKey();
         }
     }
 }
