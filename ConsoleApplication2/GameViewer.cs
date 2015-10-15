@@ -150,4 +150,6 @@ namespace ConsoleApplication2
             Console.ResetColor();
         }
     }
+
+//dodać funkcje wyświetlające węża oraz jedzenie.
 }

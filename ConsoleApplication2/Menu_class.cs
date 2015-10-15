@@ -10,6 +10,7 @@ namespace ConsoleApplication2
 {
     class Menu_class
     {
+        public bool muzik = true;// Kontolka do napisów a także do wyłączania muzyki 
         int menu_state = 0;
         const String start =
 "                                                                              $$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$$$$$$\\ $$$$$$$$\\    \n" +
@@ -59,7 +60,7 @@ namespace ConsoleApplication2
 "                                                         $$ | \\_/ $$ |\\$$$$$$  |\\$$$$$$  |$$$$$$\\ \\$$$$$$  |       $$$$$$  |$$ |      $$ |          \n" +
 "                                                         \\__|     \\__| \\______/  \\______/ \\______| \\______/        \\______/ \\__|      \\__|            \n";
 
-        private void reset_menu(bool muzik)
+        public void reset_menu(bool muzik)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(0, 5);
@@ -248,7 +249,7 @@ while (!oThread.IsAlive) ;
     reset_menu(true);
     highlight_menu(0,true);
     menu_conroler();
-
+    
         
     }
         public static void ClearCurrentConsoleLine(int currentLineCursor)
@@ -260,14 +261,13 @@ while (!oThread.IsAlive) ;
 			}
             
         }
-        private void menu_conroler()
+        public void menu_conroler()
         {
-            bool muzik = true;// Kontolka do napisów a także do wyłączania muzyki 
+            Scoreboard scoreboard = new Scoreboard();
+            scoreboard.wczytaj();
             while (true)
             {
                 ConsoleKeyInfo kb;
-                while (true)
-                {
                     kb = Console.ReadKey(false);
                     switch (kb.Key)
                     { //react to input
@@ -343,6 +343,8 @@ while (!oThread.IsAlive) ;
                                     }
                                     break;
                                 case 2:
+                                    scoreboard.wypisz();
+                                    // funkcja wypisz w kalsie scoreboard
                                     //odpal tablice wynikow
                                     break;
                                 case 3:
@@ -352,11 +354,7 @@ while (!oThread.IsAlive) ;
                             }
 
                             break;
-                    }
-                }
-                
-
-                
+                    }     
             }
         }
     }
