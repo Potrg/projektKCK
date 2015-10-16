@@ -321,8 +321,8 @@ while (!oThread.IsAlive) ;
                                 case 0:
                                     GameViewer view = new GameViewer();
                                     view.wyswietl_wynik(0987651234);
-                                    view.wyswietl_wynik(35489);
-                                    Console.ReadKey();
+                                    //view.wyswietl_wynik(35489);
+                                    Console.ReadKey(false);
                                     break;
                                 case 1:
                                     if ((kb.Key == ConsoleKey.Enter) && (muzik == false))
@@ -344,12 +344,9 @@ while (!oThread.IsAlive) ;
                                     break;
                                 case 2:
                                     scoreboard.wypisz();
-                                    // funkcja wypisz w kalsie scoreboard
-                                    //odpal tablice wynikow
                                     break;
                                 case 3:
                                     Environment.Exit(0);
-                                    //wyłącz grę odpal napisy koncowe
                                     break;
                             }
 

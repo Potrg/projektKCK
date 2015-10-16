@@ -20,7 +20,7 @@ namespace ConsoleApplication2
             Menu_class menu = new Menu_class();
             menu.show_menu();
             
-            Console.ReadKey();
+            Console.ReadKey(false);
         }
     }
 }

@@ -103,14 +103,23 @@ namespace ConsoleApplication2
         }
         public void wyswietl_wynik(int wynik)
         {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = ConsoleColor.Gray;
             ClearCurrentConsoleLine(0);
             int hOffset=200;
             int vOffset=0;
             string wynik_elo = Convert.ToString(wynik);
             for (int i = wynik_elo.Length-1; i >= 0;i-- )
             {
+                if (i % 3 == 2 && i < wynik_elo.Length - 1)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    int kropkomat = hOffset - 1;
+                    int kropkomat2 = vOffset + 5;
+                    Console.SetCursorPosition(kropkomat, kropkomat2);
+                    Console.Write("*");
+
+                }
+                Console.ForegroundColor = ConsoleColor.Black;
                 hOffset = hOffset - 11;
                 switch (wynik_elo[i])
                 {
