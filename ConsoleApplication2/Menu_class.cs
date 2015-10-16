@@ -120,6 +120,7 @@ namespace ConsoleApplication2
 
             }
         }
+
     public void show_menu()
         {
             start_screen();
@@ -136,97 +137,97 @@ namespace ConsoleApplication2
     private void colorfull_snake()
     {
         String snake =
-"                                 SSSSSSSSSSSSSSS \n" +
-"                               SS:::::::::::::::S\n" +
-"                              S:::::SSSSSS::::::S\n" +
-"                              S:::::S     SSSSSSS\n" +
-"                              S:::::S            \n" +
-"                              S:::::S            \n" +
-"                               S::::SSSS         \n" +
-"                                SS::::::SSSSS    \n" +
-"                                  SSS::::::::SS  \n" +
-"                                     SSSSSS::::S \n" +
-"                                          S:::::S\n" +
-"                                          S:::::S\n" +
-"                              SSSSSSS     S:::::S\n" +
-"                              S::::::SSSSSS:::::S\n" +
-"                              S:::::::::::::::SS \n" +
-"                               SSSSSSSSSSSSSSS   \n";
+"                    WWWWWWWW                           WWWWWWWW\n" +
+"                    W::::::W                           W::::::W\n" +
+"                    W::::::W                           W::::::W\n" +
+"                    W::::::W                           W::::::W\n" +
+"                     W:::::W           WWWWW           W:::::W \n" +
+"                      W:::::W         W:::::W         W:::::W  \n" +
+"                       W:::::W       W:::::::W       W:::::W   \n" +
+"                        W:::::W     W:::::::::W     W:::::W    \n" +
+"                         W:::::W   W:::::W:::::W   W:::::W     \n" +
+"                          W:::::W W:::::W W:::::W W:::::W      \n" +
+"                           W:::::W:::::W   W:::::W:::::W       \n" +
+"                            W:::::::::W     W:::::::::W        \n" +
+"                             W:::::::W       W:::::::W         \n" +
+"                              W:::::W         W:::::W          \n" +
+"                               W:::W           W:::W           \n" +
+"                                WWW             WWW            \n";
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.SetCursorPosition(0, 9);
         Console.Write(snake);
-        Console.SetCursorPosition(54, 9);
+        Console.SetCursorPosition(69, 9);
         Console.ForegroundColor = ConsoleColor.DarkCyan;
-         Console.Write("NNNNNNNN        NNNNNNNN");Console.SetCursorPosition(54, 10);
-         Console.Write("N:::::::N       N::::::N");Console.SetCursorPosition(54, 11);
-         Console.Write("N::::::::N      N::::::N");Console.SetCursorPosition(54, 12);
-         Console.Write("N:::::::::N     N::::::N");Console.SetCursorPosition(54, 13);
-         Console.Write("N::::::::::N    N::::::N");Console.SetCursorPosition(54, 14);
-         Console.Write("N:::::::::::N   N::::::N");Console.SetCursorPosition(54, 15);
-         Console.Write("N:::::::N::::N  N::::::N");Console.SetCursorPosition(54, 16);
-         Console.Write("N::::::N N::::N N::::::N");Console.SetCursorPosition(54, 17);
-         Console.Write("N::::::N  N::::N:::::::N");Console.SetCursorPosition(54, 18);
-         Console.Write("N::::::N   N:::::::::::N");Console.SetCursorPosition(54, 19);
-         Console.Write("N::::::N    N::::::::::N");Console.SetCursorPosition(54, 20);
-         Console.Write("N::::::N     N:::::::::N");Console.SetCursorPosition(54, 21);
-         Console.Write("N::::::N      N::::::::N");Console.SetCursorPosition(54, 22);
-         Console.Write("N::::::N       N:::::::N");Console.SetCursorPosition(54, 23);
-         Console.Write("N::::::N        N::::::N");Console.SetCursorPosition(54, 24);
-         Console.Write("NNNNNNNN         NNNNNNN");Console.SetCursorPosition(54, 25);
+        Console.Write("     OOOOOOOOO     "); Console.SetCursorPosition(69, 10);
+        Console.Write("   OO:::::::::OO   "); Console.SetCursorPosition(69, 11);
+        Console.Write(" OO:::::::::::::OO "); Console.SetCursorPosition(69, 12);
+        Console.Write("O:::::::OOO:::::::O"); Console.SetCursorPosition(69, 13);
+        Console.Write("O::::::O   O::::::O"); Console.SetCursorPosition(69, 14);
+        Console.Write("O:::::O     O:::::O"); Console.SetCursorPosition(69, 15);
+        Console.Write("O:::::O     O:::::O"); Console.SetCursorPosition(69, 16);
+        Console.Write("O:::::O     O:::::O"); Console.SetCursorPosition(69, 17);
+        Console.Write("O:::::O     O:::::O"); Console.SetCursorPosition(69, 18);
+        Console.Write("O:::::O     O:::::O"); Console.SetCursorPosition(69, 19);
+        Console.Write("O:::::O     O:::::O"); Console.SetCursorPosition(69, 20);
+        Console.Write("O::::::O   O::::::O"); Console.SetCursorPosition(69, 21);
+        Console.Write("O:::::::OOO:::::::O"); Console.SetCursorPosition(69, 22);
+        Console.Write(" OO:::::::::::::OO "); Console.SetCursorPosition(69, 23);
+        Console.Write("   OO:::::::::OO   "); Console.SetCursorPosition(69, 24);
+        Console.Write("     OOOOOOOOO     "); Console.SetCursorPosition(69, 25);
          Console.ForegroundColor = ConsoleColor.DarkGreen;
-         Console.SetCursorPosition(83, 9);
-         Console.Write("               AAA               ");Console.SetCursorPosition(83, 10);
-         Console.Write("              A:::A              ");Console.SetCursorPosition(83, 11);
-         Console.Write("             A:::::A             ");Console.SetCursorPosition(83, 12);
-         Console.Write("            A:::::::A            ");Console.SetCursorPosition(83, 13);
-         Console.Write("           A:::::::::A           ");Console.SetCursorPosition(83, 14);
-         Console.Write("          A:::::A:::::A          ");Console.SetCursorPosition(83, 15);
-         Console.Write("         A:::::A A:::::A         ");Console.SetCursorPosition(83, 16);
-         Console.Write("        A:::::A   A:::::A        ");Console.SetCursorPosition(83, 17);
-         Console.Write("       A:::::A     A:::::A       ");Console.SetCursorPosition(83, 18);
-         Console.Write("      A:::::AAAAAAAAA:::::A      ");Console.SetCursorPosition(83, 19);
-         Console.Write("     A:::::::::::::::::::::A     ");Console.SetCursorPosition(83, 20);
-         Console.Write("    A:::::AAAAAAAAAAAAA:::::A    ");Console.SetCursorPosition(83, 21);
-         Console.Write("   A:::::A             A:::::A   ");Console.SetCursorPosition(83, 22);
-         Console.Write("  A:::::A               A:::::A  ");Console.SetCursorPosition(83, 23);
-         Console.Write(" A:::::A                 A:::::A ");Console.SetCursorPosition(83, 24);
-         Console.Write("AAAAAAA                   AAAAAAA");Console.SetCursorPosition(83, 25);
-        Console.SetCursorPosition(121, 9);
+         Console.SetCursorPosition(95, 9);
+         Console.Write("NNNNNNNN        NNNNNNNN"); Console.SetCursorPosition(95, 10);
+         Console.Write("N:::::::N       N::::::N"); Console.SetCursorPosition(95, 11);
+         Console.Write("N::::::::N      N::::::N"); Console.SetCursorPosition(95, 12);
+         Console.Write("N:::::::::N     N::::::N"); Console.SetCursorPosition(95, 13);
+         Console.Write("N::::::::::N    N::::::N"); Console.SetCursorPosition(95, 14);
+         Console.Write("N:::::::::::N   N::::::N"); Console.SetCursorPosition(95, 15);
+         Console.Write("N:::::::N::::N  N::::::N"); Console.SetCursorPosition(95, 16);
+         Console.Write("N::::::N N::::N N::::::N"); Console.SetCursorPosition(95, 17);
+         Console.Write("N::::::N  N::::N:::::::N"); Console.SetCursorPosition(95, 18);
+         Console.Write("N::::::N   N:::::::::::N"); Console.SetCursorPosition(95, 19);
+         Console.Write("N::::::N    N::::::::::N"); Console.SetCursorPosition(95, 20);
+         Console.Write("N::::::N     N:::::::::N"); Console.SetCursorPosition(95, 21);
+         Console.Write("N::::::N      N::::::::N"); Console.SetCursorPosition(95, 22);
+         Console.Write("N::::::N       N:::::::N"); Console.SetCursorPosition(95, 23);
+         Console.Write("N::::::N        N::::::N"); Console.SetCursorPosition(95, 24);
+         Console.Write("NNNNNNNN         NNNNNNN"); Console.SetCursorPosition(95, 25);
+        Console.SetCursorPosition(125, 9);
         Console.ForegroundColor = ConsoleColor.DarkMagenta;
-         Console.Write("KKKKKKKKK    KKKKKKK");Console.SetCursorPosition(121, 10);
-         Console.Write("K:::::::K    K:::::K");Console.SetCursorPosition(121, 11);
-         Console.Write("K:::::::K    K:::::K");Console.SetCursorPosition(121, 12);
-         Console.Write("K:::::::K   K::::::K");Console.SetCursorPosition(121, 13);
-         Console.Write("KK::::::K  K:::::KKK");Console.SetCursorPosition(121, 14);
-         Console.Write("  K:::::K K:::::K   ");Console.SetCursorPosition(121, 15);
-         Console.Write("  K::::::K:::::K    ");Console.SetCursorPosition(121, 16);
-         Console.Write("  K:::::::::::K     ");Console.SetCursorPosition(121, 17);
-         Console.Write("  K:::::::::::K     ");Console.SetCursorPosition(121, 18);
-         Console.Write("  K::::::K:::::K    ");Console.SetCursorPosition(121, 19);
-         Console.Write("  K:::::K K:::::K   ");Console.SetCursorPosition(121, 20);
-         Console.Write("KK::::::K  K:::::KKK");Console.SetCursorPosition(121, 21);
-         Console.Write("K:::::::K   K::::::K");Console.SetCursorPosition(121, 22);
-         Console.Write("K:::::::K    K:::::K");Console.SetCursorPosition(121, 23);
-         Console.Write("K:::::::K    K:::::K");Console.SetCursorPosition(121, 24);
-         Console.Write("KKKKKKKKK    KKKKKKK");Console.SetCursorPosition(121, 25);
-         Console.SetCursorPosition(149, 9);
+        Console.Write("   SSSSSSSSSSSSSSS "); Console.SetCursorPosition(125, 10);
+        Console.Write(" SS:::::::::::::::S"); Console.SetCursorPosition(125, 11);
+        Console.Write("S:::::SSSSSS::::::S"); Console.SetCursorPosition(125, 12);
+        Console.Write("S:::::S     SSSSSSS"); Console.SetCursorPosition(125, 13);
+        Console.Write("S:::::S            "); Console.SetCursorPosition(125, 14);
+        Console.Write("S:::::S            "); Console.SetCursorPosition(125, 15);
+        Console.Write(" S::::SSSS         "); Console.SetCursorPosition(125, 16);
+        Console.Write("  SS::::::SSSSS    "); Console.SetCursorPosition(125, 17);
+        Console.Write("    SSS::::::::SS  "); Console.SetCursorPosition(125, 18);
+        Console.Write("       SSSSSS::::S "); Console.SetCursorPosition(125, 19);
+        Console.Write("            S:::::S"); Console.SetCursorPosition(125, 20);
+        Console.Write("            S:::::S"); Console.SetCursorPosition(125, 21);
+        Console.Write("SSSSSSS     S:::::S"); Console.SetCursorPosition(125, 22);
+        Console.Write("S::::::SSSSSS:::::S"); Console.SetCursorPosition(125, 23);
+        Console.Write("S:::::::::::::::SS "); Console.SetCursorPosition(125, 24);
+        Console.Write(" SSSSSSSSSSSSSSS   "); Console.SetCursorPosition(125, 25);
+         Console.SetCursorPosition(151, 9);
          Console.ForegroundColor = ConsoleColor.DarkYellow;
-         Console.Write("EEEEEEEEEEEEEEEEEEEEEE");Console.SetCursorPosition(149, 10);
-         Console.Write("E::::::::::::::::::::E");Console.SetCursorPosition(149, 11);
-         Console.Write("E::::::::::::::::::::E");Console.SetCursorPosition(149, 12);
-         Console.Write("EE::::::EEEEEEEEE::::E");Console.SetCursorPosition(149, 13);
-         Console.Write("  E:::::E       EEEEEE");Console.SetCursorPosition(149, 14);
-         Console.Write("  E:::::E             ");Console.SetCursorPosition(149, 15);
-         Console.Write("  E::::::EEEEEEEEEE   ");Console.SetCursorPosition(149, 16);
-         Console.Write("  E:::::::::::::::E   ");Console.SetCursorPosition(149, 17);
-         Console.Write("  E:::::::::::::::E   ");Console.SetCursorPosition(149, 18);
-         Console.Write("  E::::::EEEEEEEEEE   ");Console.SetCursorPosition(149, 19);
-         Console.Write("  E:::::E             ");Console.SetCursorPosition(149, 20);
-         Console.Write("  E:::::E       EEEEEE");Console.SetCursorPosition(149, 21);
-         Console.Write("EE::::::EEEEEEEE:::::E");Console.SetCursorPosition(149, 22);
-         Console.Write("E::::::::::::::::::::E");Console.SetCursorPosition(149, 23);
-         Console.Write("E::::::::::::::::::::E");Console.SetCursorPosition(149, 24);
-         Console.Write("EEEEEEEEEEEEEEEEEEEEEE");Console.SetCursorPosition(149, 25);
+         Console.Write("ZZZZZZZZZZZZZZZZZZZ");Console.SetCursorPosition(151, 10);
+         Console.Write("Z:::::::::::::::::Z");Console.SetCursorPosition(151, 11);
+         Console.Write("Z:::::::::::::::::Z");Console.SetCursorPosition(151, 12);
+         Console.Write("Z:::ZZZZZZZZ:::::Z ");Console.SetCursorPosition(151, 13);
+         Console.Write("ZZZZZ     Z:::::Z  ");Console.SetCursorPosition(151, 14);
+         Console.Write("        Z:::::Z    ");Console.SetCursorPosition(151, 15);
+         Console.Write("       Z:::::Z     ");Console.SetCursorPosition(151, 16);
+         Console.Write("      Z:::::Z      ");Console.SetCursorPosition(151, 17);
+         Console.Write("     Z:::::Z       ");Console.SetCursorPosition(151, 18);
+         Console.Write("    Z:::::Z        ");Console.SetCursorPosition(151, 19);
+         Console.Write("   Z:::::Z         ");Console.SetCursorPosition(151, 20);
+         Console.Write("ZZZ:::::Z     ZZZZZ");Console.SetCursorPosition(151, 21);
+         Console.Write("Z::::::ZZZZZZZZ:::Z");Console.SetCursorPosition(151, 22);
+         Console.Write("Z:::::::::::::::::Z");Console.SetCursorPosition(151, 23);
+         Console.Write("Z:::::::::::::::::Z");Console.SetCursorPosition(151, 24);
+         Console.Write("ZZZZZZZZZZZZZZZZZZZ");Console.SetCursorPosition(151, 25);
 
     
     
