@@ -13,6 +13,7 @@ namespace ConsoleApplication2
         string path = "scoreboard.txt";
         public void wczytaj()
         {
+            listPlayer.Clear();
             if (File.Exists(path))
             {
                 using (StreamReader personfile = new StreamReader(path,false))
@@ -33,7 +34,7 @@ namespace ConsoleApplication2
         }
         public void zapisz()
         {
-            File.Delete(path);
+            //File.Delete(path);
             using (StreamWriter sw2 = new StreamWriter(path,false))
             {
                 foreach (Player player in listPlayer)

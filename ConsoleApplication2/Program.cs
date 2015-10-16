@@ -12,6 +12,7 @@ namespace ConsoleApplication2
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
+            Console.CursorSize = 12;
             Console.BufferHeight = 60;
             Console.BufferWidth = 200;
             Console.SetWindowSize(200, 60);
