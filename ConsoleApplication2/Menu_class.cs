@@ -228,11 +228,6 @@ namespace ConsoleApplication2
          Console.Write("Z:::::::::::::::::Z");Console.SetCursorPosition(151, 23);
          Console.Write("Z:::::::::::::::::Z");Console.SetCursorPosition(151, 24);
          Console.Write("ZZZZZZZZZZZZZZZZZZZ");Console.SetCursorPosition(151, 25);
-
-    
-    
-    
-    
     }
         private void start_screen()
     {

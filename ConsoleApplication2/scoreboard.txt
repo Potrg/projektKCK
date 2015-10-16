@@ -45,19 +45,3 @@ helloo,24221
 elo,123
 pioterk,43
 matylda,12
-     OOOOOOOOO     NNNNNNNN        NNNNNNNN   SSSSSSSSSSSSSSS ZZZZZZZZZZZZZZZZZZZ
-   OO:::::::::OO   N:::::::N       N::::::N SS:::::::::::::::SZ:::::::::::::::::Z
- OO:::::::::::::OO N::::::::N      N::::::NS:::::SSSSSS::::::SZ:::::::::::::::::Z
-O:::::::OOO:::::::ON:::::::::N     N::::::NS:::::S     SSSSSSSZ:::ZZZZZZZZ:::::Z 
-O::::::O   O::::::ON::::::::::N    N::::::NS:::::S            ZZZZZ     Z:::::Z  
-O:::::O     O:::::ON:::::::::::N   N::::::NS:::::S                    Z:::::Z    
-O:::::O     O:::::ON:::::::N::::N  N::::::N S::::SSSS                Z:::::Z     
-O:::::O     O:::::ON::::::N N::::N N::::::N  SS::::::SSSSS          Z:::::Z      
-O:::::O     O:::::ON::::::N  N::::N:::::::N    SSS::::::::SS       Z:::::Z       
-O:::::O     O:::::ON::::::N   N:::::::::::N       SSSSSS::::S     Z:::::Z        
-O:::::O     O:::::ON::::::N    N::::::::::N            S:::::S   Z:::::Z         
-O::::::O   O::::::ON::::::N     N:::::::::N            S:::::SZZZ:::::Z     ZZZZZ
-O:::::::OOO:::::::ON::::::N      N::::::::NSSSSSSS     S:::::SZ::::::ZZZZZZZZ:::Z
- OO:::::::::::::OO N::::::N       N:::::::NS::::::SSSSSS:::::SZ:::::::::::::::::Z
-   OO:::::::::OO   N::::::N        N::::::NS:::::::::::::::SS Z:::::::::::::::::Z
-     OOOOOOOOO     NNNNNNNN         NNNNNNN SSSSSSSSSSSSSSS   ZZZZZZZZZZZZZZZZZZZ

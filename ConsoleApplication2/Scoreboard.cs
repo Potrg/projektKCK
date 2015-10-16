@@ -9,6 +9,13 @@ namespace ConsoleApplication2
 {
     class Scoreboard
     {
+        String tablica_wynikow= 
+"                                                           ███████╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗  ██████╗  █████╗ ██████╗ ██████╗ \n"+
+"                                                           ██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗\n"+
+"                                                           ███████╗██║     ██║   ██║██████╔╝█████╗  ██████╔╝██║   ██║███████║██████╔╝██║  ██║\n"+
+"                                                           ╚════██║██║     ██║   ██║██╔══██╗██╔══╝  ██╔══██╗██║   ██║██╔══██║██╔══██╗██║  ██║\n"+
+"                                                           ███████║╚██████╗╚██████╔╝██║  ██║███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝\n"+
+"                                                           ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \n";
         List<Player> listPlayer = new List<Player>();
         string path = "scoreboard.txt";
         public void wczytaj()
@@ -59,6 +66,9 @@ namespace ConsoleApplication2
         {
             wczytaj();
             Console.Clear();
+            Console.SetCursorPosition(0, 10);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(tablica_wynikow);
             int hoffset = 68;
             int voffset = 26;
             Console.SetCursorPosition(hoffset, voffset++);
