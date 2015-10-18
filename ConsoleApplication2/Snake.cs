@@ -20,28 +20,49 @@ namespace ConsoleApplication2
 
     class Snake
     {
-        enum kierunek : byte { prawo = 0, lewo = 1, dol = 2, gora = 3 };
+        public Snake(int sciany, int sleepTime)
+    {
+    this.sleepTime = sleepTime;
+    this.sciany = sciany;
+    }
+        enum kierunek : byte 
+        { 
+            prawo = 0, 
+            lewo = 1, 
+            dol = 2, 
+            gora = 3 
+        };
         GameViewer wyswietl = new GameViewer();
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
         Random generator_liczb = new Random(); // random do losowania koordynat nowych smakołyków
         Koordynaty pokarm;
-        public bool muzik = true;
+        Koordynaty pokarm_specjalny;
+        public bool muzik;
         public int mnoznik = 100; // uzaleznić od poziomu //deski 33 // czesciowe deski 87 // brak granic 121
-        public int userPoints = 0;
+        public int sciany;
+        public int punkty = 0;
+        double sleepTime = 50;// jak długo wąż ma spać - decyduje o szybkości węża
+        int punkty_dodatkowe = 0;
 
         private void losuj_jedzenie()
         {
-            //Koordynaty jedzenie;
             do
             {
                 pokarm = new Koordynaty(generator_liczb.Next(8, Console.WindowHeight),
                     generator_liczb.Next(0, Console.WindowWidth));
             }
             while (wonsz.Contains(pokarm) || przeszkody.Contains(pokarm));
-            //return jedzenie;
         }
-
+        private void losuj_jedzenie_specjalne()
+        {
+            do
+            {
+                pokarm_specjalny = new Koordynaty(generator_liczb.Next(8, Console.WindowHeight),
+                    generator_liczb.Next(0, Console.WindowWidth));
+            }
+            while (wonsz.Contains(pokarm_specjalny) || przeszkody.Contains(pokarm_specjalny) || pokarm.Equals(pokarm_specjalny));
+        }
         public void pause()
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -84,8 +105,9 @@ namespace ConsoleApplication2
                     Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
                 }
             }
+            else
+            przeszkody.Clear();
         }
-
         public void narodziny_weza()
         {
             for (int i = 1; i <= 10; i++)
@@ -101,12 +123,13 @@ namespace ConsoleApplication2
             Console.BufferWidth = 201;
             Console.SetWindowSize(200, 60);
             //Zmienne :o
-            double sleepTime = 50;// jak długo wąż ma spać - decyduje o szybkości węża
             int kierunek_poruszania = (int)kierunek.prawo; // początkowy kierunek (by np wonsz nie wpadl na skałę)
             int licznik_karmienia_weza = 0;// odlicza czas od odtatniego karmienia
+            int licznik_karmienia_weza2 = 0;
             int czas_usuniecia_jedzenia = 40000; // jak dłygo jedzenie pozostaje na planszy
             int punkty_ujemne = 0; // punkty ujemne za niezjedzone jesdzenie 
             licznik_karmienia_weza = Environment.TickCount;
+            licznik_karmienia_weza2 = Environment.TickCount;
 
 
             Koordynaty[] tablica_skretow = new Koordynaty[]
@@ -116,12 +139,12 @@ namespace ConsoleApplication2
                 new Koordynaty(1, 0), // down
                 new Koordynaty(-1, 0), // up
             };
-
-            dodawanie_scian(1);
+            losuj_jedzenie_specjalne();
+            dodawanie_scian(sciany);
             wyswietl.sciany(przeszkody);//klasa game viewer
             narodziny_weza();
             losuj_jedzenie();
-            wyswietl.jedzenie(pokarm);//klasa game viewer
+            wyswietl.jedzenie(pokarm,0);//klasa game viewer
             wyswietl.weza(wonsz);//klasa game viewer 
             while (true)
             {
@@ -150,72 +173,91 @@ namespace ConsoleApplication2
 
                 }
 
-                Koordynaty snakeHead = wonsz.Last();
-                Koordynaty nextDirection = tablica_skretow[kierunek_poruszania];
+                Koordynaty aktualnaGlowa = wonsz.Last();
+                Koordynaty nowy_kierunek = tablica_skretow[kierunek_poruszania];
 
-                Koordynaty snakeNewHead = new Koordynaty(snakeHead.row + nextDirection.row,
-                    snakeHead.col + nextDirection.col);
+                Koordynaty nowaGlowa = new Koordynaty(aktualnaGlowa.row + nowy_kierunek.row,
+                    aktualnaGlowa.col + nowy_kierunek.col);
 
-                if (snakeNewHead.col < 0) snakeNewHead.col = Console.WindowWidth - 1;
-                if (snakeNewHead.row < 0) snakeNewHead.row = Console.WindowHeight - 1;
-                if (snakeNewHead.row >= Console.WindowHeight) snakeNewHead.row = 0;
-                if (snakeNewHead.col >= Console.WindowWidth) snakeNewHead.col = 0;
+                if (nowaGlowa.col < 0) nowaGlowa.col = Console.WindowWidth - 1; ///
+                if (nowaGlowa.row < 6) nowaGlowa.row = Console.WindowHeight - 1;/// Wanrunki przechodzenia przez sciany
+                if (nowaGlowa.row >= Console.WindowHeight) nowaGlowa.row = 6;  ////
+                if (nowaGlowa.col >= Console.WindowWidth) nowaGlowa.col = 0;   ////
 
-                if (wonsz.Contains(snakeNewHead) || przeszkody.Contains(snakeNewHead)) // Warunek kończoncy grę !
-                {
-                    //Console.SetCursorPosition(0, 0);
-                    //Console.ForegroundColor = ConsoleColor.Red;  // wywołać gameogev();
-                    //Console.WriteLine("Game over!");
-                    userPoints = (wonsz.Count - 10) * 100 - punkty_ujemne;
-                    if (userPoints < 0) userPoints = 0;
-                    userPoints = Math.Max(userPoints, 0);
-                    Console.WriteLine("Your points are: {0}", userPoints);
+                if (wonsz.Contains(nowaGlowa) || przeszkody.Contains(nowaGlowa)) // Warunek kończoncy grę !
+                {    
+                    punkty = (wonsz.Count - 10) * mnoznik - punkty_ujemne + punkty_dodatkowe;
+                    if (punkty < 0) punkty = 0;
+                    punkty = Math.Max(punkty, 0);
+                    wyswietl.muzik = this.muzik;
+                    wyswietl.game_over(punkty);
                     Thread.Sleep(2000);
                     Console.ReadKey(false);
                     return;
                 }
 
-                Console.SetCursorPosition(snakeHead.col, snakeHead.row);
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("█");
+                wonsz.Enqueue(nowaGlowa);// doadnie nowej glowy do kolejki
+                wyswietl.usun_stara_glowe(aktualnaGlowa);
+                wyswietl.zmien_kierunek_glowy(nowaGlowa, kierunek_poruszania);
 
-                wonsz.Enqueue(snakeNewHead);
+               
+                    if (nowaGlowa.col == pokarm_specjalny.col && nowaGlowa.row == pokarm_specjalny.row)
+                    {
+                        licznik_karmienia_weza2 = Environment.TickCount;
+                        //losuj_jedzenie_specjalne();
+                        wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
+                    }
+                    if (Environment.TickCount - licznik_karmienia_weza2 >= 20000)
+                        {
+                        int temp = generator_liczb.Next(1,5);
+                        if (temp==1)
+                        {
+                            losuj_jedzenie_specjalne();
+                            wyswietl.jedzenie(pokarm, 1);
+                        }
+                        if (temp == 2)
+                        {
+                            losuj_jedzenie_specjalne();
+                            wyswietl.jedzenie(pokarm, 2);
+                        }
+                        if (temp == 3)
+                        {
+                            losuj_jedzenie_specjalne();
+                            wyswietl.jedzenie(pokarm, 3);
+                        }
+                        if (temp == 4)
+                        {
+                            losuj_jedzenie_specjalne();
+                            wyswietl.jedzenie(pokarm, 4);
+                        }
 
-                Console.SetCursorPosition(snakeNewHead.col, snakeNewHead.row);
-                Console.ForegroundColor = ConsoleColor.Gray;
-                if (kierunek_poruszania == (int)kierunek.prawo) Console.Write(">");
-                if (kierunek_poruszania == (int)kierunek.lewo) Console.Write("<");
-                if (kierunek_poruszania == (int)kierunek.gora) Console.Write("^");
-                if (kierunek_poruszania == (int)kierunek.dol) Console.Write("v");
+                        
+                    }
+                
 
-
-                if (snakeNewHead.col == pokarm.col && snakeNewHead.row == pokarm.row)
+                if (nowaGlowa.col == pokarm.col && nowaGlowa.row == pokarm.row)
                 {
-                    // feeding the snake
+                    // karmienie weza
                     losuj_jedzenie();
                     licznik_karmienia_weza = Environment.TickCount;
-
-                    userPoints = (wonsz.Count - 10) * mnoznik - punkty_ujemne;
-                    wyswietl.wyswietl_wynik(Math.Max(userPoints, 0));
-                    wyswietl.jedzenie(pokarm);//klasa game viewer
+                    punkty = (wonsz.Count - 10) * mnoznik - punkty_ujemne + punkty_dodatkowe;
+                    wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
+                    wyswietl.jedzenie(pokarm,0);//klasa game viewer
                 }
                 else
                 {
-                    // moving...
-                    Koordynaty last = wonsz.Dequeue();
-                    Console.SetCursorPosition(last.col, last.row);
-                    Console.Write(" ");
+                    // prouszanie się węża - usunięcie ogona jesli nic nie zjadł
+                    Koordynaty last = wonsz.Dequeue(); // uzyskiwanie "adresu" ogona 
+                    wyswietl.usun_pokarm_lub_ogon(last);
                 }
-                if (Environment.TickCount - licznik_karmienia_weza >= czas_usuniecia_jedzenia)
+                if (Environment.TickCount - licznik_karmienia_weza >= czas_usuniecia_jedzenia) // usuwanie pokarmu po okreslonym czasie
                 {
                     punkty_ujemne = punkty_ujemne + 50;
-                    Console.SetCursorPosition(pokarm.col, pokarm.row);
-                    Console.Write(" ");
+                    wyswietl.usun_pokarm_lub_ogon(pokarm);
                     losuj_jedzenie();
-
                     licznik_karmienia_weza = Environment.TickCount;
                 }
-                wyswietl.jedzenie(pokarm);
+                wyswietl.jedzenie(pokarm,0);
                 sleepTime -= 0.01;
 
                 Thread.Sleep((int)sleepTime);

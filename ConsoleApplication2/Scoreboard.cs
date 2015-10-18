@@ -24,11 +24,10 @@ namespace ConsoleApplication2
             listPlayer.Add(player);
         }
         public void wczytaj()
-        {
-            listPlayer.Clear();
+        { 
             if (File.Exists(path))
             {
-                using (StreamReader personfile = new StreamReader(path,false))
+                using (StreamReader personfile = new StreamReader(path))
                 {
                     string line;
                     while ((line = personfile.ReadLine()) != null)
@@ -53,6 +52,7 @@ namespace ConsoleApplication2
                 }
                 sw2.Close();
             }
+            listPlayer.Clear();
         }
         private static void ClearCurrentConsoleLine(int hoffset, int voffset)
         {
@@ -111,9 +111,6 @@ namespace ConsoleApplication2
                 Console.WriteLine(SortedList[i].score);
             }
             voffset = 29;
-            File.Delete(path);
-            zapisz();
-
                 ConsoleKeyInfo kb;
                 while (true)
                 {
@@ -145,6 +142,8 @@ namespace ConsoleApplication2
                             break;
                         case ConsoleKey.Escape:
                             Console.Clear();
+                            zapisz();
+                            listPlayer.Clear();
                             Menu_class menu = new Menu_class(muzik);
                             menu.reset_menu(muzik);
                             menu.highlight_menu(0, muzik);
