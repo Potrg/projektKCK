@@ -10,7 +10,11 @@ namespace ConsoleApplication2
 {
     class Menu_class
     {
-        public bool muzik = true;// Kontolka do napisów a także do wyłączania muzyki 
+        public bool muzik;// Kontolka do napisów a także do wyłączania muzyki 
+        public Menu_class(bool muzik)
+        {
+            this.muzik = muzik;
+        }
         int menu_state = 0;
         const String start =
 "                                                                              $$$$$$\\ $$$$$$$$\\  $$$$$$\\  $$$$$$$\\ $$$$$$$$\\    \n" +
@@ -73,6 +77,7 @@ namespace ConsoleApplication2
             }
             else
                 Console.Write(music_OFF);
+
             Console.SetCursorPosition(0, 30);
             Console.Write(scoreboard);
             Console.SetCursorPosition(0, 40);
@@ -99,7 +104,7 @@ namespace ConsoleApplication2
                     {
                         Console.Write(music_ON);
                     }
-                    else
+                    else if (muzik == false)
                         Console.Write(music_OFF);
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     break;
@@ -259,6 +264,7 @@ while (!oThread.IsAlive) ;
         }
         public void menu_conroler()
         {
+            Snake snake = new Snake();
             Scoreboard scoreboard = new Scoreboard();
             scoreboard.wczytaj();
             while (true)
@@ -316,7 +322,10 @@ while (!oThread.IsAlive) ;
                             {
                                 case 0:
                                     GameViewer view = new GameViewer();
+                                    Console.Clear();
                                     view.wyswietl_wynik(0987651234);
+                                    snake.muzik = this.muzik;
+                                    snake.Snake_Init();
                                     //view.wyswietl_wynik(35489);
                                     Console.ReadKey(false);
                                     break;
@@ -339,6 +348,7 @@ while (!oThread.IsAlive) ;
                                     }
                                     break;
                                 case 2:
+                                    scoreboard.muzik = this.muzik;
                                     scoreboard.wypisz();
                                     break;
                                 case 3:

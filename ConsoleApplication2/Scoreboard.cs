@@ -9,6 +9,7 @@ namespace ConsoleApplication2
 {
     class Scoreboard
     {
+        public bool muzik;
         String tablica_wynikow= 
 "                                                           ███████╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗  ██████╗  █████╗ ██████╗ ██████╗ \n"+
 "                                                           ██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗██╔══██╗\n"+
@@ -18,6 +19,10 @@ namespace ConsoleApplication2
 "                                                           ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \n";
         List<Player> listPlayer = new List<Player>();
         string path = "scoreboard.txt";
+        public void dodaj(Player player)
+        {
+            listPlayer.Add(player);
+        }
         public void wczytaj()
         {
             listPlayer.Clear();
@@ -37,11 +42,9 @@ namespace ConsoleApplication2
                     personfile.Close();
                 }
             }
-            //File.Delete(path);
         }
         public void zapisz()
-        {
-            //File.Delete(path);
+        {  
             using (StreamWriter sw2 = new StreamWriter(path,false))
             {
                 foreach (Player player in listPlayer)
@@ -142,8 +145,9 @@ namespace ConsoleApplication2
                             break;
                         case ConsoleKey.Escape:
                             Console.Clear();
-                            Menu_class menu = new Menu_class();
-                            menu.highlight_menu(0, menu.muzik);
+                            Menu_class menu = new Menu_class(muzik);
+                            menu.reset_menu(muzik);
+                            menu.highlight_menu(0, muzik);
                             menu.menu_conroler();
                             break;
                     }
