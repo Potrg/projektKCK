@@ -21,11 +21,14 @@ namespace ConsoleApplication2
     class Snake
     {
         enum kierunek : byte { prawo = 0, lewo = 1, dol = 2, gora = 3 };
-        Queue<Koordynaty> snakeElements = new Queue<Koordynaty>();
+        GameViewer wyswietl = new GameViewer();
+        Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
         Random generator_liczb = new Random(); // random do losowania koordynat nowych smakołyków
         Koordynaty pokarm;
         public bool muzik = true;
+        public int mnoznik = 100; // uzaleznić od poziomu //deski 33 // czesciowe deski 87 // brak granic 121
+        public int userPoints = 0;
 
         private void losuj_jedzenie()
         {
@@ -35,7 +38,7 @@ namespace ConsoleApplication2
                 pokarm = new Koordynaty(generator_liczb.Next(8, Console.WindowHeight),
                     generator_liczb.Next(0, Console.WindowWidth));
             }
-            while (snakeElements.Contains(pokarm) || przeszkody.Contains(pokarm));
+            while (wonsz.Contains(pokarm) || przeszkody.Contains(pokarm));
             //return jedzenie;
         }
 
@@ -65,29 +68,29 @@ namespace ConsoleApplication2
                         Console.Write("########################################################################################################################################################################################################");
                         break;}}}}
         
-        public void dodawanie_scian()
+        public void dodawanie_scian(int value)
         {
-
-
-            for (int i = 0; i < Console.WindowWidth; i++)
+            if (value == 1 || value == 2)
             {
-                Koordynaty temppos = new Koordynaty(0, i); przeszkody.Add(temppos);
-                Koordynaty temppos2 = new Koordynaty(59, i); przeszkody.Add(temppos2);
-            }
+                for (int i = 0; i < Console.WindowWidth; i++)
+                {
+                    Koordynaty temppos = new Koordynaty(6, i); przeszkody.Add(temppos);
+                    Koordynaty temppos2 = new Koordynaty(59, i); przeszkody.Add(temppos2);
+                }
 
-            for (int i = 0; i < Console.WindowHeight / 2; i++)
-            {
-                Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
-                Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
+                for (int i = 6; i < Console.WindowHeight / value; i++)
+                {
+                    Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
+                    Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
+                }
             }
-
         }
 
         public void narodziny_weza()
         {
             for (int i = 1; i <= 10; i++)
             {
-                snakeElements.Enqueue(new Koordynaty(1, i));
+                wonsz.Enqueue(new Koordynaty(7, i));
             }
         }
 
@@ -114,32 +117,12 @@ namespace ConsoleApplication2
                 new Koordynaty(-1, 0), // up
             };
 
-
-            
-            
-            foreach (Koordynaty sciana in przeszkody)
-            {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.SetCursorPosition(sciana.col, sciana.row);
-                Console.Write("#");
-            }
-
+            dodawanie_scian(1);
+            wyswietl.sciany(przeszkody);//klasa game viewer
             narodziny_weza();
             losuj_jedzenie();
-                    
-
-            Console.SetCursorPosition(pokarm.col, pokarm.row);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("@");
-
-            foreach (Koordynaty pozycja in snakeElements)
-            {
-                Console.SetCursorPosition(pozycja.col, pozycja.row);
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("█");
-            }
-
-
+            wyswietl.jedzenie(pokarm);//klasa game viewer
+            wyswietl.weza(wonsz);//klasa game viewer 
             while (true)
             {
 
@@ -167,7 +150,7 @@ namespace ConsoleApplication2
 
                 }
 
-                Koordynaty snakeHead = snakeElements.Last();
+                Koordynaty snakeHead = wonsz.Last();
                 Koordynaty nextDirection = tablica_skretow[kierunek_poruszania];
 
                 Koordynaty snakeNewHead = new Koordynaty(snakeHead.row + nextDirection.row,
@@ -178,12 +161,12 @@ namespace ConsoleApplication2
                 if (snakeNewHead.row >= Console.WindowHeight) snakeNewHead.row = 0;
                 if (snakeNewHead.col >= Console.WindowWidth) snakeNewHead.col = 0;
 
-                if (snakeElements.Contains(snakeNewHead) || przeszkody.Contains(snakeNewHead)) // Warunek kończoncy grę !
+                if (wonsz.Contains(snakeNewHead) || przeszkody.Contains(snakeNewHead)) // Warunek kończoncy grę !
                 {
                     //Console.SetCursorPosition(0, 0);
                     //Console.ForegroundColor = ConsoleColor.Red;  // wywołać gameogev();
                     //Console.WriteLine("Game over!");
-                    int userPoints = (snakeElements.Count - 10) * 100 - punkty_ujemne;
+                    userPoints = (wonsz.Count - 10) * 100 - punkty_ujemne;
                     if (userPoints < 0) userPoints = 0;
                     userPoints = Math.Max(userPoints, 0);
                     Console.WriteLine("Your points are: {0}", userPoints);
@@ -196,7 +179,8 @@ namespace ConsoleApplication2
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("█");
 
-                snakeElements.Enqueue(snakeNewHead);
+                wonsz.Enqueue(snakeNewHead);
+
                 Console.SetCursorPosition(snakeNewHead.col, snakeNewHead.row);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 if (kierunek_poruszania == (int)kierunek.prawo) Console.Write(">");
@@ -211,32 +195,27 @@ namespace ConsoleApplication2
                     losuj_jedzenie();
                     licznik_karmienia_weza = Environment.TickCount;
 
-                    Console.SetCursorPosition(pokarm.col, pokarm.row);
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("@");
+                    userPoints = (wonsz.Count - 10) * mnoznik - punkty_ujemne;
+                    wyswietl.wyswietl_wynik(Math.Max(userPoints, 0));
+                    wyswietl.jedzenie(pokarm);//klasa game viewer
                 }
                 else
                 {
                     // moving...
-                    Koordynaty last = snakeElements.Dequeue();
+                    Koordynaty last = wonsz.Dequeue();
                     Console.SetCursorPosition(last.col, last.row);
-                    Console.Write(' ');
+                    Console.Write(" ");
                 }
-
                 if (Environment.TickCount - licznik_karmienia_weza >= czas_usuniecia_jedzenia)
                 {
                     punkty_ujemne = punkty_ujemne + 50;
                     Console.SetCursorPosition(pokarm.col, pokarm.row);
-                    Console.Write(' ');
+                    Console.Write(" ");
                     losuj_jedzenie();
 
                     licznik_karmienia_weza = Environment.TickCount;
                 }
-
-                Console.SetCursorPosition(pokarm.col, pokarm.row);
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("@");
-
+                wyswietl.jedzenie(pokarm);
                 sleepTime -= 0.01;
 
                 Thread.Sleep((int)sleepTime);

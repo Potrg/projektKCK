@@ -93,7 +93,7 @@ namespace ConsoleApplication2
                     break;
             }
         }
-        public static void ClearCurrentConsoleLine(int currentLineCursor)
+        private static void ClearCurrentConsoleLine(int currentLineCursor) /// przystosowane do czyszczenia wyników
         {
             for (int i = currentLineCursor; i < currentLineCursor + 6; i++)
             {
@@ -107,9 +107,12 @@ namespace ConsoleApplication2
             ClearCurrentConsoleLine(0);
             int hOffset=200;
             int vOffset=0;
+
             string wynik_elo = Convert.ToString(wynik);
+            // dodawanie kropki do wyniku - żeby ładnie wyglądało
             for (int i = wynik_elo.Length-1; i >= 0;i-- )
             {
+                hOffset = hOffset - 11;
                 if (i % 3 == 2 && i < wynik_elo.Length - 1)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -120,7 +123,7 @@ namespace ConsoleApplication2
 
                 }
                 Console.ForegroundColor = ConsoleColor.Black;
-                hOffset = hOffset - 11;
+                
                 switch (wynik_elo[i])
                 {
                     case '0':
@@ -158,7 +161,38 @@ namespace ConsoleApplication2
             }
             Console.ResetColor();
         }
+
+        public void jedzenie(Koordynaty pokarm)
+        {
+            Console.SetCursorPosition(pokarm.col, pokarm.row);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("@");
+        }
+        public void sciany(List<Koordynaty> przeszkody)
+        {
+            foreach (Koordynaty sciana in przeszkody)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.SetCursorPosition(sciana.col, sciana.row);
+                Console.Write("#");
+            }
+        }
+        public void weza(Queue<Koordynaty> wonsz)
+        {
+            foreach (Koordynaty pozycja in wonsz)
+            {
+                Console.SetCursorPosition(pozycja.col, pozycja.row);
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write("█");
+            }
+        }
+
+        public void game_over()
+    {
+
     }
+    }
+
 
 //dodać funkcje wyświetlające węża oraz jedzenie.
 }

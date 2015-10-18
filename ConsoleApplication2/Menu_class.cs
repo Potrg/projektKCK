@@ -323,7 +323,7 @@ while (!oThread.IsAlive) ;
                                 case 0:
                                     GameViewer view = new GameViewer();
                                     Console.Clear();
-                                    view.wyswietl_wynik(0987651234);
+                                    view.wyswietl_wynik(90010230);
                                     snake.muzik = this.muzik;
                                     snake.Snake_Init();
                                     //view.wyswietl_wynik(35489);

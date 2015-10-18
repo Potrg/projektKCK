@@ -19,8 +19,7 @@ namespace ConsoleApplication2
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.SetCursorPosition(0, 0);
             Menu_class menu = new Menu_class(true);
-            menu.show_menu();
-            
+            menu.show_menu();       
             Console.ReadKey(false);
         }
     }
