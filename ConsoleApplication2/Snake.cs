@@ -40,7 +40,7 @@ namespace ConsoleApplication2
         Koordynaty pokarm_specjalny;
         public bool muzik;
         public int mnoznik = 100; // uzaleznić od poziomu //deski 33 // czesciowe deski 87 // brak granic 121
-        public int sciany;
+        public int sciany; //podawane w konstruktorze!
         public int punkty = 0;
         double sleepTime = 50;// jak długo wąż ma spać - decyduje o szybkości węża
         int punkty_dodatkowe = 0;
@@ -66,13 +66,14 @@ namespace ConsoleApplication2
         public void pause()
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(0, 0);
+            Console.SetCursorPosition(0, 6);
             Console.Write("  PAUSE__CLICK_P_TO_CONTINUE_THE_GAME___||||___CLICK_Esc_TO_exit_THE_GAME___||||___PAUSE__CLICK_P_TO_CONTINUE_THE_GAME___||||___CLICK_Esc_TO_exit_THE_GAME___||||___PAUSE__CLICK_P_TO_CONTINUE_THE_GAME ");
+            
             while (true)
             {
                 if (Console.KeyAvailable)
                 {
-                    ConsoleKeyInfo kl2 = Console.ReadKey(); // przerobić na switcha
+                    ConsoleKeyInfo kl2 = Console.ReadKey(false); // przerobić na switcha
                     if (kl2.Key == ConsoleKey.Escape)
                     {
                         Console.Clear();
@@ -85,8 +86,9 @@ namespace ConsoleApplication2
                     if (kl2.Key == ConsoleKey.P)
                     {
                         Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.SetCursorPosition(0, 0);
-                        Console.Write("########################################################################################################################################################################################################");
+                        Console.SetCursorPosition(0, 6);
+                        Console.Write("                                                                                                                                                                                                        ");
+                        wyswietl.sciany(przeszkody);
                         break;}}}}
         
         public void dodawanie_scian(int value)
@@ -99,13 +101,24 @@ namespace ConsoleApplication2
                     Koordynaty temppos2 = new Koordynaty(59, i); przeszkody.Add(temppos2);
                 }
 
-                for (int i = 6; i < Console.WindowHeight / value; i++)
+                if (value == 1)
                 {
-                    Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
-                    Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
+                    for (int i = 6; i < Console.WindowHeight / 2; i++)
+                    {
+                        Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
+                        Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
+                    }
+                }
+                if (value == 2)
+                {
+                    for (int i = 6; i < Console.WindowHeight; i++)
+                    {
+                        Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
+                        Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
+                    }
                 }
             }
-            else
+            else if(value==0)
             przeszkody.Clear();
         }
         public void narodziny_weza()
@@ -258,7 +271,7 @@ namespace ConsoleApplication2
                     licznik_karmienia_weza = Environment.TickCount;
                 }
                 wyswietl.jedzenie(pokarm,0);
-                sleepTime -= 0.01;
+                sleepTime -= 0.001;
 
                 Thread.Sleep((int)sleepTime);
             }
