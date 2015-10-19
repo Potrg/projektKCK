@@ -36,6 +36,7 @@ namespace ConsoleApplication2
         GameViewer wyswietl = new GameViewer();
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
+        Random generator = new Random();
         Random generator_liczb = new Random(); // random do losowania koordynat nowych smakołyków
         Koordynaty pokarm;
         Koordynaty pokarm_specjalny;
@@ -59,10 +60,10 @@ namespace ConsoleApplication2
         {
             do
             {
-                pokarm_specjalny = new Koordynaty(generator_liczb.Next(8, Console.WindowHeight),
-                    generator_liczb.Next(0, Console.WindowWidth));
+                pokarm_specjalny = new Koordynaty(generator.Next(8, Console.WindowHeight),
+                    generator.Next(0, Console.WindowWidth));
             }
-            while (wonsz.Contains(pokarm_specjalny) || przeszkody.Contains(pokarm_specjalny) || pokarm.Equals(pokarm_specjalny));
+            while (wonsz.Contains(pokarm_specjalny) || przeszkody.Contains(pokarm_specjalny) || pokarm_specjalny.Equals(pokarm));
         }
         public void pause()
         {
@@ -77,11 +78,12 @@ namespace ConsoleApplication2
                     ConsoleKeyInfo kl2 = Console.ReadKey(false); // przerobić na switcha
                     if (kl2.Key == ConsoleKey.Escape)
                     {
+                        player.Stop();
                         Console.Clear();
                         Menu_class menu = new Menu_class(muzik);
                         menu.reset_menu(muzik);
                         menu.highlight_menu(0,muzik);
-                        menu.menu_conroler(false);
+                        menu.menu_conroler(true);
                         //wejdz do głównego menu
                     }
                     if (kl2.Key == ConsoleKey.P)
@@ -90,7 +92,7 @@ namespace ConsoleApplication2
                         Console.SetCursorPosition(0, 6);
                         Console.Write("                                                                                                                                                                                                        ");
                         wyswietl.sciany(przeszkody);
-                        break;}}}}
+                        break;}}}}//mod tą funkcje do działania w grze
         
         public void dodawanie_scian(int value)
         {
@@ -135,7 +137,11 @@ namespace ConsoleApplication2
             player.SoundLocation = "2.wav";
             if (muzik == true)
             {
-                player.PlayLooping();
+                player.Stop();
+                var p2 = new System.Windows.Media.MediaPlayer();
+                p2.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\2.wav"));
+                p2.Play();
+                //player.PlayLooping();
             }
             double mnoznik_za_lvl = (1 / sleepTime) * 33 + (sciany+1)*2;
             Console.CursorSize = 12;
@@ -150,6 +156,7 @@ namespace ConsoleApplication2
             int punkty_ujemne = 0; // punkty ujemne za niezjedzone jesdzenie 
             licznik_karmienia_weza = Environment.TickCount;
             licznik_karmienia_weza2 = Environment.TickCount;
+            int temp=2;
 
 
             Koordynaty[] tablica_skretow = new Koordynaty[]
@@ -159,13 +166,13 @@ namespace ConsoleApplication2
                 new Koordynaty(1, 0), // down
                 new Koordynaty(-1, 0), // up
             };
-            losuj_jedzenie_specjalne();
-            wyswietl.jedzenie(pokarm_specjalny, 1);
             dodawanie_scian(sciany);
             wyswietl.sciany(przeszkody);//klasa game viewer
             narodziny_weza();
             losuj_jedzenie();
             wyswietl.jedzenie(pokarm,0);//klasa game viewer
+            losuj_jedzenie_specjalne();
+            wyswietl.jedzenie(pokarm_specjalny, 2);
             wyswietl.weza(wonsz);//klasa game viewer 
             while (true)
             {
@@ -202,7 +209,7 @@ namespace ConsoleApplication2
 
                 if (nowaGlowa.col < 0) nowaGlowa.col = Console.WindowWidth - 1; ///
                 if (nowaGlowa.row < 6) nowaGlowa.row = Console.WindowHeight - 1;/// Wanrunki przechodzenia przez sciany
-                if (nowaGlowa.row >= Console.WindowHeight) nowaGlowa.row = 6;  ////
+                if (nowaGlowa.row >= Console.WindowHeight) nowaGlowa.row = 6;  //// zmiana na wymiary okna w nst projekcie
                 if (nowaGlowa.col >= Console.WindowWidth) nowaGlowa.col = 0;   ////
 
                 if (wonsz.Contains(nowaGlowa) || przeszkody.Contains(nowaGlowa)) // Warunek kończoncy grę !
@@ -224,41 +231,75 @@ namespace ConsoleApplication2
                
                     if (nowaGlowa.col == pokarm_specjalny.col && nowaGlowa.row == pokarm_specjalny.row)
                     {
-                        licznik_karmienia_weza2 = Environment.TickCount;
-                        if (Environment.TickCount - licznik_karmienia_weza2 >= 20000)
-                        losuj_jedzenie_specjalne();
-                        wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
-                    }
-                    if (Environment.TickCount - licznik_karmienia_weza2 >= 20000)
+                        //playerelo.SoundLocation = "bite.wav";
+                        //player.Play();
+                        //Thread soundThread = new Thread(new ThreadStart(playerelo.Play));
+                        //soundThread.Start();
+                        //while (!soundThread.IsAlive) ;
+                        //soundThread.Abort();
+                        //soundThread.Join();
+                        if (temp==1)
                         {
-                        int temp = generator_liczb.Next(1,5);
+                            punkty_ujemne += punkty / 2;
+                        }
+                        if (temp == 2)
+                        {
+                            punkty_dodatkowe += 500;
+                        }
+                        if (temp == 3)
+                        {
+                            sleepTime += 10;
+                        }
+                        if (temp == 4)
+                        {
+                            sleepTime -= 10;
+                        }
+                        licznik_karmienia_weza2 = Environment.TickCount;
+                        punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
+                        wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
+                        wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
+                        pokarm_specjalny.col = 0;
+                        pokarm_specjalny.row = 0;
+                    }
+                    if (Environment.TickCount - licznik_karmienia_weza2 >= 25000)
+                        {
+                             // random do losowania koordynat nowych smakołyków
+                        temp = generator.Next(1,5);
                         if (temp==1)
                         {
                             losuj_jedzenie_specjalne();
-                            wyswietl.jedzenie(pokarm, 1);
+                            wyswietl.jedzenie(pokarm_specjalny, 1);
                         }
                         if (temp == 2)
                         {
                             losuj_jedzenie_specjalne();
-                            wyswietl.jedzenie(pokarm, 2);
+                            wyswietl.jedzenie(pokarm_specjalny, 2);
                         }
                         if (temp == 3)
                         {
                             losuj_jedzenie_specjalne();
-                            wyswietl.jedzenie(pokarm, 3);
+                            wyswietl.jedzenie(pokarm_specjalny, 3);
                         }
                         if (temp == 4)
                         {
                             losuj_jedzenie_specjalne();
-                            wyswietl.jedzenie(pokarm, 4);
+                            wyswietl.jedzenie(pokarm_specjalny, 4);
                         }
-
-                        
+                        licznik_karmienia_weza2 = Environment.TickCount;                        
                     }
                 
 
                 if (nowaGlowa.col == pokarm.col && nowaGlowa.row == pokarm.row)
                 {
+                    new System.Threading.Thread(() =>
+                    {
+                        var c = new System.Windows.Media.MediaPlayer();
+                        c.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\bite.wav"));
+                        c.Play();
+                    }).Start();
+                    //var p2 = new System.Windows.Media.MediaPlayer();
+                    //p2.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\bite.wav"));
+                    //p2.Play();
                     // karmienie weza
                     losuj_jedzenie();
                     licznik_karmienia_weza = Environment.TickCount;

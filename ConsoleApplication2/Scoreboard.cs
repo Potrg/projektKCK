@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApplication2
 {
     class Scoreboard
     {
+
         public bool muzik;
         String tablica_wynikow= 
 "                                                           ███████╗ ██████╗ ██████╗ ██████╗ ███████╗██████╗  ██████╗  █████╗ ██████╗ ██████╗ \n"+
@@ -65,7 +67,7 @@ namespace ConsoleApplication2
             }
 
         }
-        public void wypisz()
+        public void wypisz(bool muzyka)//funkcja tworzaca obraz - podmiana w nst projekcie
         { 
             wczytaj();
             Console.Clear();
@@ -147,7 +149,7 @@ namespace ConsoleApplication2
                             Menu_class menu = new Menu_class(muzik);
                             menu.reset_menu(muzik);
                             menu.highlight_menu(0, muzik);
-                            menu.menu_conroler(true);
+                            menu.menu_conroler(muzyka);
                             break;
                         case ConsoleKey.Enter:
                             Console.Clear();
@@ -156,7 +158,7 @@ namespace ConsoleApplication2
                             menu = new Menu_class(muzik);
                             menu.reset_menu(muzik);
                             menu.highlight_menu(0, muzik);
-                            menu.menu_conroler(true);
+                            menu.menu_conroler(muzyka);
                             break;
                     }
 

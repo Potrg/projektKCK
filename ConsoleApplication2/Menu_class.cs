@@ -434,6 +434,7 @@ while (!oThread.IsAlive) ;
             int lvl=0;
             int speed=100;
             //sciany(lvl);
+            lvl_state = 0;
             restart_LVL(lvl, speed);
             highlight_LVL(0, lvl, speed);
             while (true)
@@ -563,7 +564,7 @@ while (!oThread.IsAlive) ;
         }
         public void menu_conroler(bool play)
         {
-            if (play == true)
+            if (play == true && muzik==true)
             {
                 player.SoundLocation = "1.wav";
                 player.Play();
@@ -649,7 +650,7 @@ while (!oThread.IsAlive) ;
                                     break;
                                 case 2:
                                     scoreboard.muzik = this.muzik;
-                                    scoreboard.wypisz();
+                                    scoreboard.wypisz(false);
                                     break;
                                 case 3:
                                     Environment.Exit(0);

@@ -162,9 +162,9 @@ namespace ConsoleApplication2
             Console.ResetColor();
         }
 
-        public void jedzenie(Koordynaty pokarm,int color)
+        public void jedzenie(Koordynaty pokarmmm,int color)
         {
-            Console.SetCursorPosition(pokarm.col, pokarm.row);
+            Console.SetCursorPosition(pokarmmm.col, pokarmmm.row);
             if (color==0)Console.ForegroundColor = ConsoleColor.Yellow;
             if (color == 1) Console.ForegroundColor = ConsoleColor.Red;
             if (color == 2) Console.ForegroundColor = ConsoleColor.Green;
@@ -172,6 +172,7 @@ namespace ConsoleApplication2
             if (color == 4) Console.ForegroundColor = ConsoleColor.White;
 
             Console.Write("@");
+            Console.SetCursorPosition(pokarmmm.col, pokarmmm.row);
         }
         public void sciany(List<Koordynaty> przeszkody)
         {
@@ -263,7 +264,7 @@ namespace ConsoleApplication2
         Thread.Sleep(500);
         player.Stop();
         scoreboard.muzik = this.muzik;
-        scoreboard.wypisz();
+        scoreboard.wypisz(true);
     }
 
     }
