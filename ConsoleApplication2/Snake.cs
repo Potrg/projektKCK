@@ -20,6 +20,7 @@ namespace ConsoleApplication2
 
     class Snake
     {
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         public Snake(int sciany, int sleepTime)
     {
     this.sleepTime = sleepTime;
@@ -39,12 +40,12 @@ namespace ConsoleApplication2
         Koordynaty pokarm;
         Koordynaty pokarm_specjalny;
         public bool muzik;
-        public int mnoznik = 100; // uzaleznić od poziomu //deski 33 // czesciowe deski 87 // brak granic 121
+        public int mnoznik = 89; // uzaleznić od poziomu //deski 33 // czesciowe deski 87 // brak granic 121
         public int sciany; //podawane w konstruktorze!
         public int punkty = 0;
-        double sleepTime = 50;// jak długo wąż ma spać - decyduje o szybkości węża
+        public double sleepTime = 50;// jak długo wąż ma spać - decyduje o szybkości węża
         int punkty_dodatkowe = 0;
-
+        
         private void losuj_jedzenie()
         {
             do
@@ -80,7 +81,7 @@ namespace ConsoleApplication2
                         Menu_class menu = new Menu_class(muzik);
                         menu.reset_menu(muzik);
                         menu.highlight_menu(0,muzik);
-                        menu.menu_conroler();
+                        menu.menu_conroler(false);
                         //wejdz do głównego menu
                     }
                     if (kl2.Key == ConsoleKey.P)
@@ -131,6 +132,12 @@ namespace ConsoleApplication2
 
         public void Snake_Init()
         {
+            player.SoundLocation = "2.wav";
+            if (muzik == true)
+            {
+                player.PlayLooping();
+            }
+            double mnoznik_za_lvl = (1 / sleepTime) * 33 + (sciany+1)*2;
             Console.CursorSize = 12;
             Console.BufferHeight = 60;
             Console.BufferWidth = 201;
@@ -139,7 +146,7 @@ namespace ConsoleApplication2
             int kierunek_poruszania = (int)kierunek.prawo; // początkowy kierunek (by np wonsz nie wpadl na skałę)
             int licznik_karmienia_weza = 0;// odlicza czas od odtatniego karmienia
             int licznik_karmienia_weza2 = 0;
-            int czas_usuniecia_jedzenia = 40000; // jak dłygo jedzenie pozostaje na planszy
+            int czas_usuniecia_jedzenia = 30000; // jak dłygo jedzenie pozostaje na planszy
             int punkty_ujemne = 0; // punkty ujemne za niezjedzone jesdzenie 
             licznik_karmienia_weza = Environment.TickCount;
             licznik_karmienia_weza2 = Environment.TickCount;
@@ -153,6 +160,7 @@ namespace ConsoleApplication2
                 new Koordynaty(-1, 0), // up
             };
             losuj_jedzenie_specjalne();
+            wyswietl.jedzenie(pokarm_specjalny, 1);
             dodawanie_scian(sciany);
             wyswietl.sciany(przeszkody);//klasa game viewer
             narodziny_weza();
@@ -198,8 +206,8 @@ namespace ConsoleApplication2
                 if (nowaGlowa.col >= Console.WindowWidth) nowaGlowa.col = 0;   ////
 
                 if (wonsz.Contains(nowaGlowa) || przeszkody.Contains(nowaGlowa)) // Warunek kończoncy grę !
-                {    
-                    punkty = (wonsz.Count - 10) * mnoznik - punkty_ujemne + punkty_dodatkowe;
+                {
+                    punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
                     if (punkty < 0) punkty = 0;
                     punkty = Math.Max(punkty, 0);
                     wyswietl.muzik = this.muzik;
@@ -217,7 +225,8 @@ namespace ConsoleApplication2
                     if (nowaGlowa.col == pokarm_specjalny.col && nowaGlowa.row == pokarm_specjalny.row)
                     {
                         licznik_karmienia_weza2 = Environment.TickCount;
-                        //losuj_jedzenie_specjalne();
+                        if (Environment.TickCount - licznik_karmienia_weza2 >= 20000)
+                        losuj_jedzenie_specjalne();
                         wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
                     }
                     if (Environment.TickCount - licznik_karmienia_weza2 >= 20000)
@@ -253,7 +262,7 @@ namespace ConsoleApplication2
                     // karmienie weza
                     losuj_jedzenie();
                     licznik_karmienia_weza = Environment.TickCount;
-                    punkty = (wonsz.Count - 10) * mnoznik - punkty_ujemne + punkty_dodatkowe;
+                    punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
                     wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
                     wyswietl.jedzenie(pokarm,0);//klasa game viewer
                 }
@@ -271,7 +280,7 @@ namespace ConsoleApplication2
                     licznik_karmienia_weza = Environment.TickCount;
                 }
                 wyswietl.jedzenie(pokarm,0);
-                sleepTime -= 0.001;
+                //sleepTime -= 0.001;
 
                 Thread.Sleep((int)sleepTime);
             }

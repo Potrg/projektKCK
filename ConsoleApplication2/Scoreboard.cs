@@ -66,7 +66,7 @@ namespace ConsoleApplication2
 
         }
         public void wypisz()
-        {
+        { 
             wczytaj();
             Console.Clear();
             Console.SetCursorPosition(0, 10);
@@ -147,7 +147,16 @@ namespace ConsoleApplication2
                             Menu_class menu = new Menu_class(muzik);
                             menu.reset_menu(muzik);
                             menu.highlight_menu(0, muzik);
-                            menu.menu_conroler();
+                            menu.menu_conroler(true);
+                            break;
+                        case ConsoleKey.Enter:
+                            Console.Clear();
+                            zapisz();
+                            listPlayer.Clear();
+                            menu = new Menu_class(muzik);
+                            menu.reset_menu(muzik);
+                            menu.highlight_menu(0, muzik);
+                            menu.menu_conroler(true);
                             break;
                     }
 

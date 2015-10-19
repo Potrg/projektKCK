@@ -10,6 +10,7 @@ namespace ConsoleApplication2
 {
     class Menu_class
     {
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         public bool muzik;// Kontolka do napisów a także do wyłączania muzyki 
         public Menu_class(bool muzik)
         {
@@ -290,7 +291,8 @@ String start2 =
     }
         private void start_screen()
     {
-
+        player.SoundLocation = "1.wav";
+        player.Play();
 flash tekstmigotajacy = new flash();
 Thread oThread = new Thread(new ThreadStart(tekstmigotajacy.start_screen));
 colorfull_snake();
@@ -303,7 +305,7 @@ while (!oThread.IsAlive) ;
     Console.Clear();
     reset_menu(true);
     highlight_menu(0,true);
-    menu_conroler();
+    menu_conroler(false);
     
         
     }
@@ -480,7 +482,7 @@ while (!oThread.IsAlive) ;
                         Console.Clear();
                         reset_menu(muzik);
                         highlight_menu(0, muzik);
-                        menu_conroler();
+                        menu_conroler(false);
                         break;
                 }
                 if (kb.Key == ConsoleKey.Enter)
@@ -498,8 +500,8 @@ while (!oThread.IsAlive) ;
                     {
                         
                        // sciany(lvl);
-                        if (lvl == 0) { lvl = 1; sciany(0); }
-                        else if (lvl == 1) { lvl = 2; sciany(1); }
+                        if (lvl == 0) { lvl = 1; }//sciany(0); }
+                        else if (lvl == 1) { lvl = 2; }//sciany(1); }
                         else if (lvl == 2) { lvl = 0; }//sciany(2); }
                         highlight_LVL(1, lvl, speed);
                                           
@@ -559,8 +561,13 @@ while (!oThread.IsAlive) ;
                 }
             }
         }
-        public void menu_conroler()
+        public void menu_conroler(bool play)
         {
+            if (play == true)
+            {
+                player.SoundLocation = "1.wav";
+                player.Play();
+            }
             Scoreboard scoreboard = new Scoreboard();
             while (true)
             {
@@ -622,13 +629,16 @@ while (!oThread.IsAlive) ;
                                 case 1:
                                     if ((kb.Key == ConsoleKey.Enter) && (muzik == false))
                                     {
+                                        player.SoundLocation = "1.wav";
+                                        player.Play();
+                                        player.Play();
                                         muzik = true;// wlacz wlacz dzwieki + zmiana stanu DODAC FUNKCJE WYLACZENIA DZWIEKOW
                                         Console.Clear();
-                                        highlight_menu(1, muzik);
-                                        
+                                        highlight_menu(1, muzik);                                       
                                     }
                                     else if ((kb.Key == ConsoleKey.Enter) && (muzik == true))
                                     {
+                                        player.Stop();
                                         muzik = false;// wylacz wlacz dzwieki + zmiana stanu
                                         ClearCurrentConsoleLine(20);
                                         Console.ForegroundColor = ConsoleColor.Red;

@@ -216,7 +216,13 @@ namespace ConsoleApplication2
         }
 
         public void game_over(int wynik)
-    { 
+    {
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+        player.SoundLocation = "loose.wav";
+        if (muzik == true)
+        {
+            player.PlayLooping();
+        }
         Console.Clear();
         for (int i = 0, j= 0 ; i < 25; i++)
         {
@@ -255,6 +261,7 @@ namespace ConsoleApplication2
             scoreboard.dodaj(winner);
         }
         Thread.Sleep(500);
+        player.Stop();
         scoreboard.muzik = this.muzik;
         scoreboard.wypisz();
     }
