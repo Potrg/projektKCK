@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace SnakeApp
 {
-
     class GameViewer
     {
         enum kierunek : byte 
@@ -164,7 +160,7 @@ namespace ConsoleApplication2
 
         public void jedzenie(Koordynaty pokarmmm,int color)
         {
-            Console.SetCursorPosition(pokarmmm.col, pokarmmm.row);
+            Console.SetCursorPosition((int)pokarmmm.col, (int)pokarmmm.row);
             if (color==0)Console.ForegroundColor = ConsoleColor.Yellow;
             if (color == 1) Console.ForegroundColor = ConsoleColor.Red;
             if (color == 2) Console.ForegroundColor = ConsoleColor.Green;
@@ -172,14 +168,14 @@ namespace ConsoleApplication2
             if (color == 4) Console.ForegroundColor = ConsoleColor.White;
 
             Console.Write("@");
-            Console.SetCursorPosition(pokarmmm.col, pokarmmm.row);
+            Console.SetCursorPosition((int)pokarmmm.col, (int)pokarmmm.row);
         }
         public void sciany(List<Koordynaty> przeszkody)
         {
             foreach (Koordynaty sciana in przeszkody)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.SetCursorPosition(sciana.col, sciana.row);
+                Console.SetCursorPosition((int)sciana.col, (int)sciana.row);
                 Console.Write("#");
             }
         }
@@ -187,7 +183,7 @@ namespace ConsoleApplication2
         {
             foreach (Koordynaty pozycja in wonsz)
             {
-                Console.SetCursorPosition(pozycja.col, pozycja.row);
+                Console.SetCursorPosition((int)pozycja.col, (int)pozycja.row);
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("█");
             }
@@ -195,14 +191,14 @@ namespace ConsoleApplication2
 
         public void usun_stara_glowe(Koordynaty snakeHead)
         {
-            Console.SetCursorPosition(snakeHead.col, snakeHead.row);
+            Console.SetCursorPosition((int)snakeHead.col, (int)snakeHead.row);
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.Write("█");
         }
 
         public void zmien_kierunek_glowy(Koordynaty snakeNewHead, int kierunek_poruszania)
         {
-            Console.SetCursorPosition(snakeNewHead.col, snakeNewHead.row);
+            Console.SetCursorPosition((int)snakeNewHead.col, (int)snakeNewHead.row);
             Console.ForegroundColor = ConsoleColor.Gray;
             if (kierunek_poruszania == (int)kierunek.prawo) Console.Write(">");
             if (kierunek_poruszania == (int)kierunek.lewo) Console.Write("<");
@@ -212,7 +208,7 @@ namespace ConsoleApplication2
 
         public void usun_pokarm_lub_ogon(Koordynaty pokarm)
         {
-            Console.SetCursorPosition(pokarm.col, pokarm.row);
+            Console.SetCursorPosition((int)pokarm.col, (int)pokarm.row);
             Console.Write(" ");
         }
 
@@ -264,11 +260,8 @@ namespace ConsoleApplication2
         Thread.Sleep(500);
         player.Stop();
         scoreboard.muzik = this.muzik;
-        scoreboard.wypisz(true);
+        scoreboard.wypisz(muzik);
     }
 
     }
-
-
-//dodać funkcje wyświetlające węża oraz jedzenie.
 }

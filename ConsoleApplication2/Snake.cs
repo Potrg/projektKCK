@@ -1,22 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace ConsoleApplication2
+namespace SnakeApp
 {
-    struct Koordynaty// pozycje do kurde wszystkiego
-    {
-        public int row;
-        public int col;
-        public Koordynaty(int row, int col)
-        {
-            this.row = row;
-            this.col = col;
-        }
-    }
+    
 
     class Snake
     {
@@ -239,7 +228,7 @@ namespace ConsoleApplication2
                     if (nowaGlowa.col == pokarm_specjalny.col && nowaGlowa.row == pokarm_specjalny.row)
                     {
                         var p2 = new System.Windows.Media.MediaPlayer();
-                        p2.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\3.wav"));
+                        p2.Open(new Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
                         p2.Play();
 
                         if (temp==1)
@@ -264,14 +253,42 @@ namespace ConsoleApplication2
                         punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
                         wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
                         wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
-                        pokarm_specjalny.col = 0;
-                        pokarm_specjalny.row = 0;
-                    }
-                    if (Environment.TickCount - licznik_karmienia_weza2 >= 25000)
+                        ///pokarm_specjalny.Clear();
+                        pokarm_specjalny = default(Koordynaty);
+                     
+                }
+                else if (nowaGlowa.col == pokarm.col && nowaGlowa.row == pokarm.row)
+                {
+                    //Metoda laternatywna
+                    //new System.Threading.Thread(() =>
+                    //{
+                    //    var c = new System.Windows.Media.MediaPlayer();
+                    //    c.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\3.wav"));
+                    //    c.Play();
+                    //}).Start();
+
+                    var p2 = new System.Windows.Media.MediaPlayer();
+                    p2.Open(new System.Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
+                    p2.Play();
+
+                    // karmienie weza
+                    losuj_jedzenie();
+                    licznik_karmienia_weza = Environment.TickCount;
+                    punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
+                    wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
+                    wyswietl.jedzenie(pokarm, 0);//klasa game viewer
+                }
+                else
+                {
+                    // prouszanie się węża - usunięcie ogona jesli nic nie zjadł
+                    Koordynaty last = wonsz.Dequeue(); // uzyskiwanie "adresu" ogona 
+                    wyswietl.usun_pokarm_lub_ogon(last);
+                }
+
+                if (Environment.TickCount - licznik_karmienia_weza2 >= 25000)
                         {
-                            wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
-                            pokarm_specjalny.col = 0;
-                            pokarm_specjalny.row = 0;
+                    if (!pokarm_specjalny.Equals(default(Koordynaty))) { wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny); }
+                    pokarm_specjalny = default(Koordynaty);
                              // random do losowania koordynat nowych smakołyków
                         temp = generator.Next(1,5);
                         if (temp==1)
@@ -298,32 +315,8 @@ namespace ConsoleApplication2
                     }
                 
 
-                if (nowaGlowa.col == pokarm.col && nowaGlowa.row == pokarm.row)
-                {
-                    //Metoda laternatywna
-                    //new System.Threading.Thread(() =>
-                    //{
-                    //    var c = new System.Windows.Media.MediaPlayer();
-                    //    c.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\3.wav"));
-                    //    c.Play();
-                    //}).Start();
+                
 
-                    var p2 = new System.Windows.Media.MediaPlayer();
-                    p2.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\3.wav"));
-                    p2.Play();
-                    // karmienie weza
-                    losuj_jedzenie();
-                    licznik_karmienia_weza = Environment.TickCount;
-                    punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
-                    wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
-                    wyswietl.jedzenie(pokarm,0);//klasa game viewer
-                }
-                else
-                {
-                    // prouszanie się węża - usunięcie ogona jesli nic nie zjadł
-                    Koordynaty last = wonsz.Dequeue(); // uzyskiwanie "adresu" ogona 
-                    wyswietl.usun_pokarm_lub_ogon(last);
-                }
                 if (Environment.TickCount - licznik_karmienia_weza >= czas_usuniecia_jedzenia) // usuwanie pokarmu po okreslonym czasie
                 {
                     punkty_ujemne = punkty_ujemne + 50;
