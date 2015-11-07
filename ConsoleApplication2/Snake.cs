@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows;
 
 namespace SnakeApp
 {
@@ -24,7 +25,7 @@ namespace SnakeApp
         };
         GameViewer wyswietl = new GameViewer();
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
-        List<Koordynaty> przeszkody = new List<Koordynaty>();
+        public List<Koordynaty> przeszkody = new List<Koordynaty>();
         Random generator = new Random();
         Random generator_liczb = new Random(); // random do losowania koordynat nowych smakołyków
         Koordynaty pokarm;
@@ -56,32 +57,8 @@ namespace SnakeApp
         }
         public void pause()
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(0, 6);
-            Console.Write("  PAUSE__CLICK_P_TO_CONTINUE_THE_GAME___||||___CLICK_Esc_TO_exit_THE_GAME___||||___PAUSE__CLICK_P_TO_CONTINUE_THE_GAME___||||___CLICK_Esc_TO_exit_THE_GAME___||||___PAUSE__CLICK_P_TO_CONTINUE_THE_GAME ");
-            
-            while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo kl2 = Console.ReadKey(false); // przerobić na switcha
-                    if (kl2.Key == ConsoleKey.Escape)
-                    {
-                        player.Stop();
-                        Console.Clear();
-                        Menu_class menu = new Menu_class(muzik);
-                        menu.reset_menu(muzik);
-                        menu.highlight_menu(0,muzik);
-                        menu.menu_conroler(true);
-                        //wejdz do głównego menu
-                    }
-                    if (kl2.Key == ConsoleKey.P)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.SetCursorPosition(0, 6);
-                        Console.Write("                                                                                                                                                                                                        ");
-                        wyswietl.sciany(przeszkody);
-                        break;}}}}//mod tą funkcje do działania w grze
+            wyswietl.pause(przeszkody);
+        }//mod tą funkcje do działania w grze
         
         public void dodawanie_scian(int value)
         {
@@ -228,7 +205,10 @@ namespace SnakeApp
                     if (nowaGlowa.col == pokarm_specjalny.col && nowaGlowa.row == pokarm_specjalny.row)
                     {
                         var p2 = new System.Windows.Media.MediaPlayer();
-                        p2.Open(new Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
+                    //string startupPath = Environment.CurrentDirectory;
+                    //Uri uri = new Uri(startupPath + @"sounds\2wav");
+                    //MessageBox.Show("You Lose! Your score is "+ uri.ToString(), "Game Over", MessageBoxButton.OK, MessageBoxImage.Hand);
+                    p2.Open(new Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
                         p2.Play();
 
                         if (temp==1)

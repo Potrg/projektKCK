@@ -1,16 +1,60 @@
 ﻿<Window x:Class="WpfSnake.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfSnake"
-        mc:Ignorable="d"
-        Title="Snake!" Height="422" Width="700" ResizeMode="NoResize">
-    <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <Canvas Name="paintCanvas" Background="Black" 
-                Grid.Column="1" HorizontalAlignment="Left" MaxWidth="642" MaxHeight="422" Grid.ColumnSpan="3"></Canvas>
+        xmlns:my="clr-namespace:WpfSnake"
+        Title="WONSZ 2"
+        WindowStartupLocation="CenterScreen"
+        Height="350"
+        Width="550">
+    <Grid Background="Gray">
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="245*"/>
+            <RowDefinition Height="74*"/>
+
+        </Grid.RowDefinitions>
+        <Image Source="E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\WpfApplication1\bin\Debug\logo.png"/>
+        <my:CustomButton HorizontalAlignment="Left"
+                         Margin="227,92,0,0"
+                         Text="Start"
+                         x:Name="btn1"
+                         Click="btn1_Click"
+                         VerticalAlignment="Top">
+            <my:CustomButton.Resources>
+                <ResourceDictionary Source="FlatRedButtonStyles.xaml" />
+            </my:CustomButton.Resources>
+        </my:CustomButton>
+
+        <my:CustomButton HorizontalAlignment="Left"
+                         Margin="209,147,0,0"
+                         Text="MUSIC ON "
+                         x:Name="btn2"
+                         Click="btn2_Click"
+                         VerticalAlignment="Top">
+            <my:CustomButton.Resources>
+                <ResourceDictionary Source="FlatRedButtonStyles.xaml" />
+            </my:CustomButton.Resources>
+        </my:CustomButton>
+
+        <my:CustomButton HorizontalAlignment="Left"
+                         Margin="199,202,0,0"
+                         Text="SCOREBOARD"
+                         x:Name="btn3"
+                         Click="btn3_Click"
+                         VerticalAlignment="Top" Grid.RowSpan="2">
+            <my:CustomButton.Resources>
+                <ResourceDictionary Source="FlatRedButtonStyles.xaml" />
+            </my:CustomButton.Resources>
+        </my:CustomButton>
+        <my:CustomButton HorizontalAlignment="Left"
+                         Margin="229,17,0,0"
+                         Text="EXIT"
+                         x:Name="btn4"
+                         Click="btn4_Click"
+                         VerticalAlignment="Top" Grid.Row="2">
+            <my:CustomButton.Resources>
+                <ResourceDictionary Source="FlatRedButtonStyles.xaml" />
+            </my:CustomButton.Resources>
+        </my:CustomButton>
     </Grid>
 </Window>

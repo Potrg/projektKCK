@@ -262,6 +262,38 @@ namespace SnakeApp
         scoreboard.muzik = this.muzik;
         scoreboard.wypisz(muzik);
     }
+        public void pause(List<Koordynaty> przeszkody)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(0, 6);
+            Console.Write("  PAUSE__CLICK_P_TO_CONTINUE_THE_GAME___||||___CLICK_Esc_TO_exit_THE_GAME___||||___PAUSE__CLICK_P_TO_CONTINUE_THE_GAME___||||___CLICK_Esc_TO_exit_THE_GAME___||||___PAUSE__CLICK_P_TO_CONTINUE_THE_GAME ");
+
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo kl2 = Console.ReadKey(false); // przerobić na switcha
+                    if (kl2.Key == ConsoleKey.Escape)
+                    {
+                        //player.Stop();
+                        Console.Clear();
+                        Menu_class menu = new Menu_class(muzik);
+                        menu.reset_menu(muzik);
+                        menu.highlight_menu(0, muzik);
+                        menu.menu_conroler(true);
+                        //wejdz do głównego menu
+                    }
+                    if (kl2.Key == ConsoleKey.P)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.SetCursorPosition(0, 6);
+                        Console.Write("                                                                                                                                                                                                        ");
+                        sciany(przeszkody);
+                        return;
+                    }
+                }
+            }
+        }
 
     }
 }

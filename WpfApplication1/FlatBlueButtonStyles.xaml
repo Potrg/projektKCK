@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <!-- Hover TextBlock Style -->
+  <Style TargetType="TextBlock"
+         x:Key="CustomButtonTextBlockStyle">
+    <Setter Property="Foreground"
+            Value="White" />
+    <Setter Property="Margin"
+            Value="10" />
+    <Setter Property="FontSize"
+            Value="14" />
+  </Style>
+  <!-- Hover Brush for Pressed Hover Button Text Block -->
+  <SolidColorBrush x:Key="CustomButtonTextBlockStylePressed"
+                   Color="Black" />
+  <!-- Hover Border Thickness -->
+  <Thickness x:Key="CustomButtonBorderStyleThickness"
+             Bottom="2"
+             Left="2"
+             Right="2"
+             Top="2" />
+  <!-- Hover Border Brush -->
+  <SolidColorBrush x:Key="CustomButtonBorderBrushStyle"
+                   Color="White" />
+  <!-- Style for when hovering over button -->
+  <SolidColorBrush x:Key="CustomButtonOverStyle"
+                   Color="DarkBlue" />
+  <!-- Style for when button is pressed -->
+  <SolidColorBrush x:Key="CustomButtonPressedStyle"
+                   Color="DarkSlateBlue" />
+  <!-- Style for normal button -->
+  <SolidColorBrush x:Key="CustomButtonNormalStyle"
+                   Color="Blue" />
+  <!-- Overall Style for Hover Button -->
+  <Style TargetType="Border"
+         x:Key="CustomButtonBorderStyle">
+    <Setter Property="Margin"
+            Value="6" />
+    <Setter Property="CornerRadius"
+            Value="5" />
+    <Setter Property="Background"
+            Value="{StaticResource CustomButtonNormalStyle}" />
+    <Setter Property="BorderBrush"
+            Value="{StaticResource CustomButtonBorderBrushStyle}" />
+    <Setter Property="BorderThickness"
+            Value="{StaticResource CustomButtonBorderStyleThickness}" />
+  </Style>
+</ResourceDictionary>

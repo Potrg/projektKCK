@@ -67,7 +67,14 @@ namespace WpfSnake
 
         internal void pauza()
         {
-             
+            MessageBoxResult result1 = MessageBox.Show("Gra jest wstrzymana, czy chesz kontynuować?", "PAUZA", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result1 == MessageBoxResult.No)
+            {
+                //odpal główne menu
+            }
+            else return;
+
         }
 
         internal void zmien_kierunek_glowy(Koordynaty nowaGlowa, int kierunek_poruszania)
@@ -89,7 +96,37 @@ namespace WpfSnake
         }
 
         // wyświetlanie
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello from normal button");
+        }
 
+        private void btn1_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Start");
+        }
 
+        private void btn2_Click(object sender, RoutedEventArgs e)
+        {
+            if (btn2.Text == "MUSIC ON ")
+                btn2.Text = "MUSIC OFF";
+            else
+                btn2.Text = "MUSIC ON ";
+        }
+
+        private void btn3_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello From Flat Red Style");
+        }
+
+        private void btn4_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void btn5_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Hello From Blue Style");
+        }
     }
 }

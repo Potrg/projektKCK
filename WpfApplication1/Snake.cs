@@ -7,6 +7,9 @@ namespace WpfSnake
 {
     class Snake
     {
+        int windowHeight = 420;
+        int windowWidth = 600;
+
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         public Snake(int sciany, int sleepTime)
         {
@@ -38,8 +41,8 @@ namespace WpfSnake
         {
             do
             {
-                pokarm = new Koordynaty(generator_liczb.Next(8, Console.WindowHeight),
-                    generator_liczb.Next(0, Console.WindowWidth));
+                pokarm = new Koordynaty(generator_liczb.Next(8, windowHeight),
+                    generator_liczb.Next(0, windowWidth));
             }
             while (wonsz.Contains(pokarm) || przeszkody.Contains(pokarm) || pokarm_specjalny.Equals(pokarm));
         }
@@ -47,42 +50,22 @@ namespace WpfSnake
         {
             do
             {
-                pokarm_specjalny = new Koordynaty(generator.Next(8, Console.WindowHeight),
-                    generator.Next(0, Console.WindowWidth));
+                pokarm_specjalny = new Koordynaty(generator.Next(8, windowHeight),
+                    generator.Next(0, windowWidth));
             }
             while (wonsz.Contains(pokarm_specjalny) || przeszkody.Contains(pokarm_specjalny) || pokarm_specjalny.Equals(pokarm));
         }
         public void pause()
         {
-            //TODO:
-            //menu pauzy
             wyswietl.pauza();
 
-            while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    ConsoleKeyInfo kl2 = Console.ReadKey(false); // przerobić na switcha
-                    if (kl2.Key == ConsoleKey.Escape)
-                    {
-                        player.Stop();
-                        //TODO:
-                        //wejdz do głównego menu
-                    }
-                    if (kl2.Key == ConsoleKey.P)
-                    {
-                        //TODO: wylacz pauze
-                        break;
-                    }
-                }
-            }
         }//mod tą funkcje do działania w grze
 
         public void dodawanie_scian(int value)
         {
             if (value == 1 || value == 2)
             {
-                for (int i = 0; i < Console.WindowWidth; i++)
+                for (int i = 0; i < windowWidth; i++)
                 {
                     Koordynaty temppos = new Koordynaty(6, i); przeszkody.Add(temppos);
                     Koordynaty temppos2 = new Koordynaty(59, i); przeszkody.Add(temppos2);
@@ -90,17 +73,17 @@ namespace WpfSnake
 
                 if (value == 1)
                 {
-                    for (int i = 6; i < Console.WindowHeight / 2; i++)
+                    for (int i = 6; i < windowHeight / 2; i++)
                     {
-                        Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
+                        Koordynaty temppos = new Koordynaty(i, windowWidth - 1); przeszkody.Add(temppos);
                         Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
                     }
                 }
                 if (value == 2)
                 {
-                    for (int i = 6; i < Console.WindowHeight; i++)
+                    for (int i = 6; i < windowHeight; i++)
                     {
-                        Koordynaty temppos = new Koordynaty(i, Console.WindowWidth - 1); przeszkody.Add(temppos);
+                        Koordynaty temppos = new Koordynaty(i, windowWidth - 1); przeszkody.Add(temppos);
                         Koordynaty temppos2 = new Koordynaty(i, 0); przeszkody.Add(temppos2);
                     }
                 }
@@ -135,10 +118,6 @@ namespace WpfSnake
                 player.PlayLooping();
             }
             double mnoznik_za_lvl = (1 / sleepTime) * 33 + (sciany + 1) * 2;
-            Console.CursorSize = 12;
-            Console.BufferHeight = 60;
-            Console.BufferWidth = 201;
-            Console.SetWindowSize(200, 60);
             //Zmienne :o
             int kierunek_poruszania = (int)kierunek.prawo; // początkowy kierunek (by np wonsz nie wpadl na skałę)
             int licznik_karmienia_weza = 0;// odlicza czas od odtatniego karmienia
@@ -165,7 +144,7 @@ namespace WpfSnake
             losuj_jedzenie_specjalne();
             wyswietl.jedzenie(pokarm_specjalny, temp);
             wyswietl.weza(wonsz);//klasa game viewer 
-            while (true)
+            while (true)//TODO: przerobic na kontrole w wpf
             {
 
                 if (Console.KeyAvailable)
@@ -198,10 +177,10 @@ namespace WpfSnake
                 Koordynaty nowaGlowa = new Koordynaty((int)aktualnaGlowa.row + (int)nowy_kierunek.row,
                     (int)aktualnaGlowa.col + (int)nowy_kierunek.col);
 
-                if (nowaGlowa.col < 0) nowaGlowa.col = Console.WindowWidth - 1; ///
-                if (nowaGlowa.row < 6) nowaGlowa.row = Console.WindowHeight - 1;/// Wanrunki przechodzenia przez sciany
-                if (nowaGlowa.row >= Console.WindowHeight) nowaGlowa.row = 6;  //// zmiana na wymiary okna w nst projekcie
-                if (nowaGlowa.col >= Console.WindowWidth) nowaGlowa.col = 0;   ////
+                if (nowaGlowa.col < 0) nowaGlowa.col = windowWidth - 1; ///
+                if (nowaGlowa.row < 6) nowaGlowa.row = windowHeight - 1;/// Wanrunki przechodzenia przez sciany
+                if (nowaGlowa.row >= windowHeight) nowaGlowa.row = 6;  //// zmiana na wymiary okna w nst projekcie
+                if (nowaGlowa.col >= windowWidth) nowaGlowa.col = 0;   ////
 
                 if (wonsz.Contains(nowaGlowa) || przeszkody.Contains(nowaGlowa)) // Warunek kończoncy grę !
                 {
