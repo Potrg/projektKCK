@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using WpfSnake.Menu;
 
 namespace WpfSnake
 {
@@ -23,7 +24,7 @@ namespace WpfSnake
             dol = 2,
             gora = 3
         };
-        MainWindow wyswietl = new MainWindow();
+        GameView wyswietl = new GameView();
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
         Random generator = new Random();

@@ -13,20 +13,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-namespace WpfSnake
+namespace WpfSnake.Menu
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GameMenu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GameView : UserControl
     {
         internal bool muzik;
 
-        public MainWindow()
+        public GameView()
         {
             InitializeComponent();
-            // Wywołanie menu, reakcja na przyciski itp
         }
         public void sciany(List<Koordynaty> przeszkody)
         {
@@ -39,7 +37,7 @@ namespace WpfSnake
         {
             //wyswietla jedzenie i jedzenie specjalne 0=normal(yellow) 1=red 2=green  3=blue   4=white;
             throw new NotImplementedException();
-        }                                                                
+        }
         internal void weza(Queue<Koordynaty> wonsz)
         {
             foreach (Koordynaty pozycja in wonsz) // cos takiego
@@ -76,7 +74,6 @@ namespace WpfSnake
             else return;
 
         }
-
         internal void zmien_kierunek_glowy(Koordynaty nowaGlowa, int kierunek_poruszania)
         {
             // tylko jesli glowa bedzie jakims krztaletem
@@ -96,37 +93,5 @@ namespace WpfSnake
         }
 
         // wyświetlanie
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello from normal button");
-        }
-
-        private void btn1_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Start");
-        }
-
-        private void btn2_Click(object sender, RoutedEventArgs e)
-        {
-            if (btn2.Text == "MUSIC ON ")
-                btn2.Text = "MUSIC OFF";
-            else
-                btn2.Text = "MUSIC ON ";
-        }
-
-        private void btn3_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello From Flat Red Style");
-        }
-
-        private void btn4_Click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
-        private void btn5_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello From Blue Style");
-        }
     }
 }
