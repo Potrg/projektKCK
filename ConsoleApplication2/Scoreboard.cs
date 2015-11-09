@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace SnakeApp
 {
-    class Scoreboard
+    public class Scoreboard
     {
 
         public bool muzik;
@@ -16,12 +16,18 @@ namespace SnakeApp
 "                                                           ╚════██║██║     ██║   ██║██╔══██╗██╔══╝  ██╔══██╗██║   ██║██╔══██║██╔══██╗██║  ██║\n"+
 "                                                           ███████║╚██████╗╚██████╔╝██║  ██║███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝\n"+
 "                                                           ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \n";
-        List<Player> listPlayer = new List<Player>();
-        string path = "scoreboard.txt";
+        public List<Player> listPlayer = new List<Player>();
+        string path = @"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\scoreboard.txt";
+        /// <summary>
+        /// dodaj - dodaje pojedyńczygo gracza do listy
+        /// </summary>
         public void dodaj(Player player)
         {
             listPlayer.Add(player);
         }
+        /// <summary>
+        /// wczytaj - dodaje zwyciezcow z pliku do lisy
+        /// </summary>
         public void wczytaj()
         { 
             if (File.Exists(path))
@@ -41,6 +47,9 @@ namespace SnakeApp
                 }
             }
         }
+        /// <summary>
+        /// zapisuje liste do pliku
+        /// </summary>
         public void zapisz()
         {  
             using (StreamWriter sw2 = new StreamWriter(path,false))
@@ -64,6 +73,9 @@ namespace SnakeApp
             }
 
         }
+        /// <summary>
+        /// Wypisuje na ekran UWAGA tylko dla consolowej aplikacji
+        /// </summary>
         public void wypisz(bool muzyka)//funkcja tworzaca obraz - podmiana w nst projekcie
         { 
             wczytaj();

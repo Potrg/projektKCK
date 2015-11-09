@@ -1,17 +1,11 @@
-﻿using System;
+﻿using SnakeApp;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFSnake;
 
 namespace WpfSnake.Menu
 {
@@ -20,47 +14,76 @@ namespace WpfSnake.Menu
     /// </summary>
     public partial class GameView : UserControl
     {
+        Canvas canvas = new Canvas();
+        public Key klawisz;
         internal bool muzik;
-
         public GameView()
         {
             InitializeComponent();
+            
+        }
+        public GameView(int lvl, int speed, bool muzik)
+        {
+            InitializeComponent();
+            Snake wonsz = new Snake(lvl, speed, muzik);
+            wonsz.Snake_Init();
+            usun_stara_glowe(new Koordynaty(10, 20));
+            this.muzik = muzik;
         }
         public void sciany(List<Koordynaty> przeszkody)
         {
             //Wyswietla sciany - przeszkody
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
 
         }
 
         public void jedzenie(Koordynaty pokarm, int typ)
         {
             //wyswietla jedzenie i jedzenie specjalne 0=normal(yellow) 1=red 2=green  3=blue   4=white;
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
         internal void weza(Queue<Koordynaty> wonsz)
         {
-            foreach (Koordynaty pozycja in wonsz) // cos takiego
+
+
+                foreach (Koordynaty pozycja in wonsz) // cos takiego
             {
-                Console.SetCursorPosition((int)pozycja.col, (int)pozycja.row);
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("█");
+                //Console.SetCursorPosition((int)pozycja.col, (int)pozycja.row);
+                //Console.ForegroundColor = ConsoleColor.DarkGray;
+                //Console.Write("█");
             }
             //rysowanie wensza
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
-        internal void game_over(int punkty)
+        internal void game_over(int punkty,bool muzik)
         {
-            MessageBox.Show("You Lose! Your score is ", "Game Over", MessageBoxButton.OK, MessageBoxImage.Hand);
+            GameOver gameover = new GameOver(punkty,muzik);
+            gameover.Show();
             //okienko game over, wprwaoadzanie wyniku
-            throw new NotImplementedException();
         }
 
         internal void usun_stara_glowe(Koordynaty aktualnaGlowa)
         {
+            Ellipse newEllipse = new Ellipse();
+            newEllipse.Fill = Brushes.Green;
+            newEllipse.Width = 4;
+            newEllipse.Height = 4;
+
+            Canvas.SetTop(newEllipse, aktualnaGlowa.row);
+            Canvas.SetLeft(newEllipse, aktualnaGlowa.col);
+
+            int count = canvas.Children.Count;
+            canvas.Children.Add(newEllipse);
+
+
+            // Restrict the tail of the snake
+            if (count > 100)
+            {
+                canvas.Children.RemoveAt(count - 100 + 9);
+            }
             //nadpisywanie glowy cialem
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         internal void pauza()
@@ -77,21 +100,32 @@ namespace WpfSnake.Menu
         internal void zmien_kierunek_glowy(Koordynaty nowaGlowa, int kierunek_poruszania)
         {
             // tylko jesli glowa bedzie jakims krztaletem
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         internal void wyswietl_wynik(int v)
         {
+            scoreshow.Text = v.ToString();
             //wyswietla wynik podczas gry
-            throw new NotImplementedException();
         }
 
         internal void usun_pokarm_lub_ogon(Koordynaty pokarm_specjalny)
         {
             // usuwa calkowicie z powierzchni gry
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ((PageSwitcher)this.Parent).ResizeMode = ResizeMode.NoResize;
+            string elo = Canvas.WidthProperty.ToString();
+
+        }
+
+        private void UserControl_KeyUp(object sender, KeyEventArgs e)
+        {
+            klawisz = e.Key;
+        }
         // wyświetlanie
     }
 }

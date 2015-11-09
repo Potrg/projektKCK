@@ -1,21 +1,24 @@
-﻿using System;
+﻿using SnakeApp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Windows.Input;
 using WpfSnake.Menu;
+using WPFSnake;
 
 namespace WpfSnake
 {
     class Snake
     {
-        int windowHeight = 420;
-        int windowWidth = 600;
-
+        int windowHeight = 350;
+        int windowWidth = 550;
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
-        public Snake(int sciany, int sleepTime)
+        public Snake(int sciany, int sleepTime, bool muzik)
         {
             this.sleepTime = sleepTime;
             this.sciany = sciany;
+            this.muzik = muzik;
         }
         enum kierunek : byte
         {
@@ -24,6 +27,7 @@ namespace WpfSnake
             dol = 2,
             gora = 3
         };
+        private bool muzik;
         GameView wyswietl = new GameView();
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
@@ -31,7 +35,7 @@ namespace WpfSnake
         Random generator_liczb = new Random(); // random do losowania koordynat nowych smakołyków
         Koordynaty pokarm;
         Koordynaty pokarm_specjalny;
-        public bool muzik;
+        
         public int mnoznik = 89; // uzaleznić od poziomu //deski 33 // czesciowe deski 87 // brak granic 121
         public int sciany; //podawane w konstruktorze!
         public int punkty = 0;
@@ -68,8 +72,8 @@ namespace WpfSnake
             {
                 for (int i = 0; i < windowWidth; i++)
                 {
-                    Koordynaty temppos = new Koordynaty(6, i); przeszkody.Add(temppos);
-                    Koordynaty temppos2 = new Koordynaty(59, i); przeszkody.Add(temppos2);
+                    Koordynaty temppos = new Koordynaty(0, i); przeszkody.Add(temppos);
+                    Koordynaty temppos2 = new Koordynaty(windowHeight-1, i); przeszkody.Add(temppos2);
                 }
 
                 if (value == 1)
@@ -102,7 +106,7 @@ namespace WpfSnake
 
         public void Snake_Init()
         {
-            player.SoundLocation = "2.wav";
+            player.SoundLocation = @"C:\content\2.wav";
             if (muzik == true)
             {
 
@@ -148,24 +152,25 @@ namespace WpfSnake
             while (true)//TODO: przerobic na kontrole w wpf
             {
 
-                if (Console.KeyAvailable)
+                if (true)
                 {
-                    ConsoleKeyInfo kl = Console.ReadKey(false); // przerobić na switcha
-                    switch (kl.Key)
+                    //ConsoleKeyInfo kl = Console.ReadKey(false); // przerobić na switcha
+                    Key k1 = wyswietl.klawisz;
+                    switch (k1)
                     {
-                        case ConsoleKey.LeftArrow:
+                        case Key.Left:
                             if (kierunek_poruszania != (int)kierunek.prawo) kierunek_poruszania = (int)kierunek.lewo;
                             break;
-                        case ConsoleKey.RightArrow:
+                        case Key.Right:
                             if (kierunek_poruszania != (int)kierunek.lewo) kierunek_poruszania = (int)kierunek.prawo;
                             break;
-                        case ConsoleKey.UpArrow:
+                        case Key.Up:
                             if (kierunek_poruszania != (int)kierunek.dol) kierunek_poruszania = (int)kierunek.gora;
                             break;
-                        case ConsoleKey.DownArrow:
+                        case Key.Down:
                             if (kierunek_poruszania != (int)kierunek.gora) kierunek_poruszania = (int)kierunek.dol;
                             break;
-                        case ConsoleKey.P:
+                        case Key.P:
                             pause();
                             break;
                     }
@@ -179,8 +184,8 @@ namespace WpfSnake
                     (int)aktualnaGlowa.col + (int)nowy_kierunek.col);
 
                 if (nowaGlowa.col < 0) nowaGlowa.col = windowWidth - 1; ///
-                if (nowaGlowa.row < 6) nowaGlowa.row = windowHeight - 1;/// Wanrunki przechodzenia przez sciany
-                if (nowaGlowa.row >= windowHeight) nowaGlowa.row = 6;  //// zmiana na wymiary okna w nst projekcie
+                if (nowaGlowa.row < 0) nowaGlowa.row = windowHeight - 1;/// Wanrunki przechodzenia przez sciany
+                if (nowaGlowa.row >= windowHeight) nowaGlowa.row = 0;  //// zmiana na wymiary okna w nst projekcie
                 if (nowaGlowa.col >= windowWidth) nowaGlowa.col = 0;   ////
 
                 if (wonsz.Contains(nowaGlowa) || przeszkody.Contains(nowaGlowa)) // Warunek kończoncy grę !
@@ -189,7 +194,7 @@ namespace WpfSnake
                     if (punkty < 0) punkty = 0;
                     punkty = Math.Max(punkty, 0);
                     wyswietl.muzik = this.muzik;
-                    wyswietl.game_over(punkty);
+                    wyswietl.game_over(punkty,muzik);
                     return;
                 }
 
@@ -226,7 +231,7 @@ namespace WpfSnake
                     punkty = (wonsz.Count - 10) * mnoznik * (int)mnoznik_za_lvl - punkty_ujemne + punkty_dodatkowe;
                     wyswietl.wyswietl_wynik(Math.Max(punkty, 0));
                     wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
-                    pokarm_specjalny.Clear();
+                    pokarm_specjalny = default(Koordynaty);
 
                 }
                 else if (nowaGlowa.col == pokarm.col && nowaGlowa.row == pokarm.row)
@@ -260,7 +265,7 @@ namespace WpfSnake
                 if (Environment.TickCount - licznik_karmienia_weza2 >= 25000)
                 {
                     wyswietl.usun_pokarm_lub_ogon(pokarm_specjalny);
-                    pokarm_specjalny.Clear();
+                    pokarm_specjalny = default(Koordynaty);
                     // random do losowania koordynat nowych smakołyków
                     temp = generator.Next(1, 5);
                     if (temp == 1)
@@ -298,5 +303,7 @@ namespace WpfSnake
                 Thread.Sleep((int)sleepTime);
             }
         }
+
+      
     }
 }

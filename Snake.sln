@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SankeApp", "ConsoleApplication2\SankeApp.csproj", "{E7C49165-F871-443F-AD3B-9A4F01C392EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnakeApp", "ConsoleApplication2\SnakeApp.csproj", "{E7C49165-F871-443F-AD3B-9A4F01C392EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfSnake", "WpfApplication1\WpfSnake.csproj", "{2FD4DAF0-7A9D-4093-9864-F272063C293F}"
 EndProject

@@ -5,51 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:local="clr-namespace:WpfSnake.Menu"
         xmlns:my="clr-namespace:WpfSnake"
-        mc:Ignorable="d" 
-        d:DesignWidth="550" Height="350">
+        mc:Ignorable="d"
+        MinWidth="550" MinHeight="350"
+        Loaded="UserControl_Loaded"   >
     <Grid Background="Gray">
-        <Image Source="E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\WpfApplication1\bin\Debug\logo.png"/>
-        <my:CustomButton HorizontalAlignment="Center"
-                         Margin="0,295,482,0"
+        <Grid Margin="0,0">
+
+            <Image Source="E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\WpfApplication1\bin\Debug\logo.png" Margin="0,0,0,0"/>
+
+
+            <my:CustomButton HorizontalAlignment="Left"
                          Text="Start"
                          x:Name="btn1"
-                         Click="btn1_Click"
-                         VerticalAlignment="Top" Width="68">
-            <my:CustomButton.Resources>
-                <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
-            </my:CustomButton.Resources>
-        </my:CustomButton>
+                         Click="btn1_Click" Width="68" Height="55" VerticalAlignment="Bottom">
+                <my:CustomButton.Resources>
+                    <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
+                </my:CustomButton.Resources>
+            </my:CustomButton>
 
-        <my:CustomButton HorizontalAlignment="Center"
-                         Margin="73,295,363,0"
+            <my:CustomButton HorizontalAlignment="Left"
+                         Margin="73,0,0,0"
                          Text="MUSIC ON "
                          x:Name="btn2"
-                         Click="btn2_Click"
-                         VerticalAlignment="Top" Width="114">
-            <my:CustomButton.Resources>
-                <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
-            </my:CustomButton.Resources>
-        </my:CustomButton>
+                         Click="btn2_Click" Width="105" Height="55" VerticalAlignment="Bottom">
+                <my:CustomButton.Resources>
+                    <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
+                </my:CustomButton.Resources>
+            </my:CustomButton>
 
-        <my:CustomButton HorizontalAlignment="Left"
-                         Margin="192,295,0,0"
+            <my:CustomButton
+                         Margin="183,0,0,0"
                          Text="SCOREBOARD"
                          x:Name="btn3"
-                         Click="btn3_Click"
-                         VerticalAlignment="Top">
-            <my:CustomButton.Resources>
-                <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
-            </my:CustomButton.Resources>
-        </my:CustomButton>
-        <my:CustomButton HorizontalAlignment="Left"
-                         Margin="488,295,0,0"
+                         Click="btn3_Click" Height="55" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="123">
+                <my:CustomButton.Resources>
+                    <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
+                </my:CustomButton.Resources>
+            </my:CustomButton>
+            <my:CustomButton
                          Text="EXIT"
                          x:Name="btn4"
-                         Click="btn4_Click"
-                         VerticalAlignment="Top">
-            <my:CustomButton.Resources>
-                <ResourceDictionary Source="../FlatRedButtonStyles.xaml" />
-            </my:CustomButton.Resources>
-        </my:CustomButton>
+                         Click="btn4_Click" HorizontalAlignment="Right" Width="62" Height="55" VerticalAlignment="Bottom">
+                <my:CustomButton.Resources>
+                    <ResourceDictionary Source="../FlatBlueButtonStyles.xaml" />
+                </my:CustomButton.Resources>
+            </my:CustomButton>
+        </Grid>
     </Grid>
 </UserControl>

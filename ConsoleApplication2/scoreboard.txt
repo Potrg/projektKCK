@@ -1,3 +1,6 @@
+siemankoo,7570
+urzytkownik testowy,4450
+piotrek,200
 guma_do_zucia,434522
 elo,12345
 guma_do_zucia,43411
@@ -31,17 +34,4 @@ guma_do_zucia,43411
 elo,123
 pioterk,43
 matylda,12
-guma_do_zucia,434522
-elo,12345
-guma_do_zucia,43411
-Piootre,2344
-humus,2342
-znaob,3234
-zajob,35532
-heniooo,45232
-metiek,32323
-ziommeeek,4236
-helloo,24221
-elo,123
-pioterk,43
-matylda,12
+elooo,20
