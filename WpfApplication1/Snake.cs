@@ -194,6 +194,7 @@ namespace WpfSnake
                     if (punkty < 0) punkty = 0;
                     punkty = Math.Max(punkty, 0);
                     wyswietl.muzik = this.muzik;
+                    player.Stop();
                     wyswietl.game_over(punkty,muzik);
                     return;
                 }

@@ -14,7 +14,7 @@ namespace WpfSnake.Menu
     /// </summary>
     public partial class GameView : UserControl
     {
-        Canvas canvas = new Canvas();
+        //Canvas canvas = new Canvas();
         public Key klawisz;
         internal bool muzik;
         public GameView()
@@ -44,9 +44,25 @@ namespace WpfSnake.Menu
         }
         internal void weza(Queue<Koordynaty> wonsz)
         {
+            Ellipse newEllipse = new Ellipse();
+            newEllipse.Fill = Brushes.Green;
+            newEllipse.Width = 6;
+            newEllipse.Height = 6;
+
+            Canvas.SetTop(newEllipse, wonsz.Dequeue().row);
+            Canvas.SetLeft(newEllipse, wonsz.Dequeue().col);
+
+            int count = canvas.Children.Count;
+            canvas.Children.Add(newEllipse);
 
 
-                foreach (Koordynaty pozycja in wonsz) // cos takiego
+            // Restrict the tail of the snake
+            if (count > 100)
+            {
+                canvas.Children.RemoveAt(count - 100 + 9);
+            }
+
+            foreach (Koordynaty pozycja in wonsz) // cos takiego
             {
                 //Console.SetCursorPosition((int)pozycja.col, (int)pozycja.row);
                 //Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -65,23 +81,7 @@ namespace WpfSnake.Menu
 
         internal void usun_stara_glowe(Koordynaty aktualnaGlowa)
         {
-            Ellipse newEllipse = new Ellipse();
-            newEllipse.Fill = Brushes.Green;
-            newEllipse.Width = 4;
-            newEllipse.Height = 4;
-
-            Canvas.SetTop(newEllipse, aktualnaGlowa.row);
-            Canvas.SetLeft(newEllipse, aktualnaGlowa.col);
-
-            int count = canvas.Children.Count;
-            canvas.Children.Add(newEllipse);
-
-
-            // Restrict the tail of the snake
-            if (count > 100)
-            {
-                canvas.Children.RemoveAt(count - 100 + 9);
-            }
+            
             //nadpisywanie glowy cialem
             //throw new NotImplementedException();
         }

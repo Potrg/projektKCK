@@ -9,7 +9,7 @@
         Loaded="UserControl_Loaded"
         Width="550" Height="350"
         KeyDown="UserControl_KeyUp">
-    <Canvas Background="Gray" Width="550" Height="350">
+    <Canvas Background="Gray" Width="550" Height="350" Name="canvas">
         <TextBox Margin="482,1,1,328" TextWrapping="Wrap" Background="Transparent" Text="" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" SelectionOpacity="1" Name="scoreshow">
             <TextBox.RenderTransform>
                 <TransformGroup>
