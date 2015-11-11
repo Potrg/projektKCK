@@ -11,7 +11,7 @@
     <Grid Background="Gray">
         <Grid Margin="0,0">
 
-            <Image Source="E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\WpfApplication1\bin\Debug\logo.png" Margin="0,0,0,0"/>
+            <Image Source="C:\content\logo.png" Margin="0,0,0,0"/>
 
 
             <my:CustomButton HorizontalAlignment="Left"

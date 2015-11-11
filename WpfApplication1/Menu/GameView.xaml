@@ -8,18 +8,111 @@
         mc:Ignorable="d"
         Loaded="UserControl_Loaded"
         Width="550" Height="350"
-        KeyDown="UserControl_KeyUp">
+        Keyboard.KeyDown="UserControl_KeyUp"
+              Focusable="True"
+             Name="panel">
     <Canvas Background="Gray" Width="550" Height="350" Name="canvas">
-        <TextBox Margin="482,1,1,328" TextWrapping="Wrap" Background="Transparent" Text="" RenderTransformOrigin="0.5,0.5" BorderBrush="{x:Null}" SelectionOpacity="1" Name="scoreshow">
-            <TextBox.RenderTransform>
+        <Label x:Name="scoreshow" Content="0" Canvas.Left="493" Width="57" Height="30" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <Button Name="upbutton"
+        Click="upbutton_Click"
+        Background="Transparent"
+        BorderBrush="Transparent"
+        BorderThickness="0" 
+        Padding="-4" Canvas.Left="490" Canvas.Top="275" Height="39" Width="36" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
-                    <SkewTransform AngleX="0.08"/>
-                    <RotateTransform Angle="0.314"/>
-                    <TranslateTransform X="0.015"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
                 </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
+            </Button.RenderTransform>
+            <Image Source="C:\content\ilu.png" Height="39" Width="42" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+        <Button Name="rightbutton"
+        Click="Right_Click"
+        Background="Transparent"
+        BorderBrush="Transparent"
+        BorderThickness="0" 
+        Padding="-4" Canvas.Left="514" Canvas.Top="295" Height="39" Width="35" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.121"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Image Source="C:\content\ilu.png" Height="34" Width="36" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+        <Button Name="downbutton"
+        Click="downbutton_Click"
+        Background="Transparent"
+        BorderBrush="Transparent"
+        BorderThickness="0" 
+        Padding="-4" Canvas.Left="489" Canvas.Top="295" Height="38" Width="45" RenderTransformOrigin="0.464,0.706">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="180"/>
+
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Image Source="C:\content\ilu.png" Height="42" Width="50" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.516"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.158"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
+        <Button Name="lefybutton"
+        Click="lefybutton_Click"
+        Background="Transparent"
+        BorderBrush="Transparent"
+        BorderThickness="0" 
+        Padding="-4" Canvas.Left="464" Canvas.Top="296" Height="40" Width="38" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="269.108"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Image Source="C:\content\ilu.png" Height="36" Width="35" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleX="0.516"/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0.158"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Button>
 
     </Canvas>
 </UserControl>

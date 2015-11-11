@@ -6,11 +6,14 @@ using System.Threading;
 using System.Windows.Input;
 using WpfSnake.Menu;
 using WPFSnake;
+using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WpfSnake
 {
     class Snake
     {
+        bool elo = true;
         int windowHeight = 350;
         int windowWidth = 550;
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
@@ -27,7 +30,8 @@ namespace WpfSnake
             dol = 2,
             gora = 3
         };
-        private bool muzik;
+        public bool muzik;
+
         GameView wyswietl = new GameView();
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
@@ -103,44 +107,40 @@ namespace WpfSnake
                 wonsz.Enqueue(new Koordynaty(7, i));
             }
         }
-
-        public void Snake_Init()
-        {
-            player.SoundLocation = @"C:\content\2.wav";
-            if (muzik == true)
-            {
-
-                player.Stop();
-                //var p1 = new System.Windows.Media.MediaPlayer();
-                //p1.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\2.wav"));
-                //p1.Play();
-                //new System.Threading.Thread(() =>
-                //{
-                //    var c = new System.Windows.Media.MediaPlayer();
-                //    c.Open(new System.Uri(@"E:\Users\The_BuBu\Documents\Visual Studio 2013\Projects\ConsoleApplication2\ConsoleApplication2\bin\Debug\2.wav"));
-                //    c.Play();
-                //}).Start();
-                player.PlayLooping();
-            }
-            double mnoznik_za_lvl = (1 / sleepTime) * 33 + (sciany + 1) * 2;
-            //Zmienne :o
-            int kierunek_poruszania = (int)kierunek.prawo; // początkowy kierunek (by np wonsz nie wpadl na skałę)
-            int licznik_karmienia_weza = 0;// odlicza czas od odtatniego karmienia
-            int licznik_karmienia_weza2 = 0;
-            int czas_usuniecia_jedzenia = 30000; // jak dłygo jedzenie pozostaje na planszy
-            int punkty_ujemne = 0; // punkty ujemne za niezjedzone jesdzenie 
-            licznik_karmienia_weza = Environment.TickCount;
-            licznik_karmienia_weza2 = Environment.TickCount;
-            int temp = 2;
-
-
-            Koordynaty[] tablica_skretow = new Koordynaty[]
-            {
+        Koordynaty[] tablica_skretow = new Koordynaty[]
+           {
                 new Koordynaty(0, 1), // right
                 new Koordynaty(0, -1), // left
                 new Koordynaty(1, 0), // down
                 new Koordynaty(-1, 0), // up
-            };
+           };
+        int kierunek_poruszania = (int)kierunek.prawo; // początkowy kierunek (by np wonsz nie wpadl na skałę)
+        int licznik_karmienia_weza = 0;// odlicza czas od odtatniego karmienia
+        int licznik_karmienia_weza2 = 0;
+        int czas_usuniecia_jedzenia = 30000; // jak dłygo jedzenie pozostaje na planszy
+        int punkty_ujemne = 0; // punkty ujemne za niezjedzone jesdzenie 
+        int temp = 2;
+        public void Snake_Init()
+        {
+            
+        }
+        //public Key k2;
+        public void snakeLoop()
+        {
+            player.SoundLocation = @"C:\content\2.wav";
+            if (muzik == true)
+            {
+                player.PlayLooping();
+            }
+
+            //Zmienne :o
+
+            licznik_karmienia_weza = Environment.TickCount;
+            licznik_karmienia_weza2 = Environment.TickCount;
+
+
+
+
             dodawanie_scian(sciany);
             wyswietl.sciany(przeszkody);//klasa game viewer
             narodziny_weza();
@@ -150,33 +150,34 @@ namespace WpfSnake
             wyswietl.jedzenie(pokarm_specjalny, temp);
             wyswietl.weza(wonsz);//klasa game viewer 
             while (true)//TODO: przerobic na kontrole w wpf
-            {
+            { 
+                double mnoznik_za_lvl = (1 / sleepTime) * 33 + (sciany + 1) * 2;
 
-                if (true)
-                {
-                    //ConsoleKeyInfo kl = Console.ReadKey(false); // przerobić na switcha
-                    Key k1 = wyswietl.klawisz;
-                    switch (k1)
+
+                //if (true)
+                //  {
+                //ConsoleKeyInfo kl = Console.ReadKey(false); // przerobić na switcha
+                //Key k1 = wyswietl.klawisz_mi_daj();
+                //App.Current.Dispatcher.BeginInvoke(new Action(() => { k2 = wyswietl.klawisz; }));
+                if (Keyboard.IsKeyDown(Key.Left))
                     {
-                        case Key.Left:
-                            if (kierunek_poruszania != (int)kierunek.prawo) kierunek_poruszania = (int)kierunek.lewo;
-                            break;
-                        case Key.Right:
-                            if (kierunek_poruszania != (int)kierunek.lewo) kierunek_poruszania = (int)kierunek.prawo;
-                            break;
-                        case Key.Up:
-                            if (kierunek_poruszania != (int)kierunek.dol) kierunek_poruszania = (int)kierunek.gora;
-                            break;
-                        case Key.Down:
-                            if (kierunek_poruszania != (int)kierunek.gora) kierunek_poruszania = (int)kierunek.dol;
-                            break;
-                        case Key.P:
-                            pause();
-                            break;
+                    if (kierunek_poruszania != (int)kierunek.prawo) kierunek_poruszania = (int)kierunek.lewo;
                     }
-
+                else if (Keyboard.IsKeyDown(Key.Right))
+                {
+                    if (kierunek_poruszania != (int)kierunek.lewo) kierunek_poruszania = (int)kierunek.prawo;
                 }
-
+                if (Keyboard.IsKeyDown(Key.Up))
+                {
+                    if (kierunek_poruszania != (int)kierunek.dol) kierunek_poruszania = (int)kierunek.gora;
+                    
+                }
+                if (Keyboard.IsKeyDown(Key.Down))
+                {
+                    if (kierunek_poruszania != (int)kierunek.gora) kierunek_poruszania = (int)kierunek.dol;
+                }
+                if (Keyboard.IsKeyDown(Key.P))
+                { pause(); }
                 Koordynaty aktualnaGlowa = wonsz.Last();
                 Koordynaty nowy_kierunek = tablica_skretow[kierunek_poruszania];
 
@@ -195,9 +196,14 @@ namespace WpfSnake
                     punkty = Math.Max(punkty, 0);
                     wyswietl.muzik = this.muzik;
                     player.Stop();
-                    wyswietl.game_over(punkty,muzik);
+                    if (elo == true) {
+                        App.Current.Dispatcher.BeginInvoke(new Action(() => { wyswietl.game_over(punkty, muzik); }));
+                        elo = false;
+                    }
+
                     return;
                 }
+                
 
                 wonsz.Enqueue(nowaGlowa);// doadnie nowej glowy do kolejki
                 wyswietl.usun_stara_glowe(aktualnaGlowa);
@@ -207,7 +213,7 @@ namespace WpfSnake
                 if (nowaGlowa.col == pokarm_specjalny.col && nowaGlowa.row == pokarm_specjalny.row)
                 {
                     var p2 = new System.Windows.Media.MediaPlayer();
-                    p2.Open(new Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
+                    p2.Open(new Uri(@"C:\content\3.wav"));
                     p2.Play();
 
                     if (temp == 1)
@@ -246,7 +252,7 @@ namespace WpfSnake
                     //}).Start();
 
                     var p2 = new System.Windows.Media.MediaPlayer();
-                    p2.Open(new System.Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
+                    p2.Open(new System.Uri(@"C:\content\3.wav"));
                     p2.Play();
 
                     // karmienie weza
@@ -300,11 +306,8 @@ namespace WpfSnake
                 }
                 wyswietl.jedzenie(pokarm, 0);
                 //sleepTime -= 0.001;
-
                 Thread.Sleep((int)sleepTime);
-            }
-        }
-
-      
+            }           
+        }     
     }
 }

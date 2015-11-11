@@ -1,11 +1,14 @@
 ﻿using SnakeApp;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using WPFSnake;
+using System;
+using System.Windows.Threading;
 
 namespace WpfSnake.Menu
 {
@@ -15,21 +18,33 @@ namespace WpfSnake.Menu
     public partial class GameView : UserControl
     {
         //Canvas canvas = new Canvas();
-        public Key klawisz;
         internal bool muzik;
         public GameView()
         {
             InitializeComponent();
             
         }
+        //Snake wonsz;
+        public int lvl, speed;
+        public Key klucz = Key.None;
+        //Thread oThread;
         public GameView(int lvl, int speed, bool muzik)
         {
-            InitializeComponent();
-            Snake wonsz = new Snake(lvl, speed, muzik);
-            wonsz.Snake_Init();
-            usun_stara_glowe(new Koordynaty(10, 20));
+           // wonsz = new Snake(lvl, speed, muzik);
             this.muzik = muzik;
+            this.speed = speed;
+            this.lvl = lvl;
+            InitializeComponent();
+            usun_stara_glowe(new Koordynaty(10, 20));
+            //wonsz.Snake_Init();
+            //wonsz.snakeLoop();
+            // oThread = new Thread(wonsz.snakeLoop);
+            // oThread.SetApartmentState(ApartmentState.STA);
+            //oThread.Start();
+            //while (!oThread.IsAlive);
+            
         }
+
         public void sciany(List<Koordynaty> przeszkody)
         {
             //Wyswietla sciany - przeszkody
@@ -44,38 +59,40 @@ namespace WpfSnake.Menu
         }
         internal void weza(Queue<Koordynaty> wonsz)
         {
-            Ellipse newEllipse = new Ellipse();
-            newEllipse.Fill = Brushes.Green;
-            newEllipse.Width = 6;
-            newEllipse.Height = 6;
+            //Ellipse newEllipse = new Ellipse();
+            //newEllipse.Fill = Brushes.Green;
+            //newEllipse.Width = 6;
+            //newEllipse.Height = 6;
 
-            Canvas.SetTop(newEllipse, wonsz.Dequeue().row);
-            Canvas.SetLeft(newEllipse, wonsz.Dequeue().col);
+            //Canvas.SetTop(newEllipse, wonsz.Dequeue().row);
+            //Canvas.SetLeft(newEllipse, wonsz.Dequeue().col);
 
-            int count = canvas.Children.Count;
-            canvas.Children.Add(newEllipse);
+            //int count = canvas.Children.Count;
+            //canvas.Children.Add(newEllipse);
 
 
-            // Restrict the tail of the snake
-            if (count > 100)
-            {
-                canvas.Children.RemoveAt(count - 100 + 9);
-            }
+            //// Restrict the tail of the snake
+            //if (count > 100)
+            //{
+            //    canvas.Children.RemoveAt(count - 100 + 9);
+            //}
 
-            foreach (Koordynaty pozycja in wonsz) // cos takiego
-            {
-                //Console.SetCursorPosition((int)pozycja.col, (int)pozycja.row);
-                //Console.ForegroundColor = ConsoleColor.DarkGray;
-                //Console.Write("█");
-            }
-            //rysowanie wensza
-            //throw new NotImplementedException();
+            //foreach (Koordynaty pozycja in wonsz) // cos takiego
+            //{
+            //    //Console.SetCursorPosition((int)pozycja.col, (int)pozycja.row);
+            //    //Console.ForegroundColor = ConsoleColor.DarkGray;
+            //    //Console.Write("█");
+            //}
+            ////rysowanie wensza
+            ////throw new NotImplementedException();
         }
 
         internal void game_over(int punkty,bool muzik)
         {
-            GameOver gameover = new GameOver(punkty,muzik);
+            
+            GameOver gameover = new GameOver(punkty, muzik);
             gameover.Show();
+
             //okienko game over, wprwaoadzanie wyniku
         }
 
@@ -88,13 +105,22 @@ namespace WpfSnake.Menu
 
         internal void pauza()
         {
+            //oThread.Suspend();
             MessageBoxResult result1 = MessageBox.Show("Gra jest wstrzymana, czy chesz kontynuować?", "PAUZA", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result1 == MessageBoxResult.No)
             {
                 //odpal główne menu
+                //oThread.Abort();
+                Switcher.Switch(new MainMenu(muzik,false));
             }
-            else return;
+            else
+            {
+               // oThread.Resume();
+                return;
+            }
+
+    
 
         }
         internal void zmien_kierunek_glowy(Koordynaty nowaGlowa, int kierunek_poruszania)
@@ -105,7 +131,7 @@ namespace WpfSnake.Menu
 
         internal void wyswietl_wynik(int v)
         {
-            scoreshow.Text = v.ToString();
+            scoreshow.Content = v.ToString();
             //wyswietla wynik podczas gry
         }
 
@@ -119,12 +145,38 @@ namespace WpfSnake.Menu
         {
             ((PageSwitcher)this.Parent).ResizeMode = ResizeMode.NoResize;
             string elo = Canvas.WidthProperty.ToString();
+            panel.Focus();
 
         }
 
         private void UserControl_KeyUp(object sender, KeyEventArgs e)
         {
-            klawisz = e.Key;
+            klucz = e.Key;
+        }
+
+        private void Right_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void upbutton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void lefybutton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void downbutton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        public Key klawisz_mi_daj()
+        {
+            return klucz;
         }
         // wyświetlanie
     }

@@ -34,4 +34,3 @@ guma_do_zucia,43411
 elo,123
 pioterk,43
 matylda,12
-elooo,20

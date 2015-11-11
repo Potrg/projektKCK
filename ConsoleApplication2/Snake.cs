@@ -208,7 +208,7 @@ namespace SnakeApp
                     //string startupPath = Environment.CurrentDirectory;
                     //Uri uri = new Uri(startupPath + @"sounds\2wav");
                     //MessageBox.Show("You Lose! Your score is "+ uri.ToString(), "Game Over", MessageBoxButton.OK, MessageBoxImage.Hand);
-                    p2.Open(new Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
+                    p2.Open(new Uri(@"C:\content\3.wav"));
                         p2.Play();
 
                         if (temp==1)
@@ -248,7 +248,7 @@ namespace SnakeApp
                     //}).Start();
 
                     var p2 = new System.Windows.Media.MediaPlayer();
-                    p2.Open(new System.Uri(@"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\sounds\3.wav"));
+                    p2.Open(new System.Uri(@"C:\content\3.wav"));
                     p2.Play();
 
                     // karmienie weza

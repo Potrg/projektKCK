@@ -13,5 +13,5 @@ namespace WpfSnake
     /// </summary>
     public partial class App : Application
     {
-    }
+}
 }

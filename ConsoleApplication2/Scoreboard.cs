@@ -17,7 +17,7 @@ namespace SnakeApp
 "                                                           ███████║╚██████╗╚██████╔╝██║  ██║███████╗██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝\n"+
 "                                                           ╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \n";
         public List<Player> listPlayer = new List<Player>();
-        string path = @"E:\OneDrive\Documents\Visual Studio 2015\Projects\ConsoleApplication2\ConsoleApplication2\scoreboard.txt";
+        string path = @"C:\content\scoreboard.txt";
         /// <summary>
         /// dodaj - dodaje pojedyńczygo gracza do listy
         /// </summary>
