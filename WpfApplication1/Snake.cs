@@ -13,9 +13,8 @@ namespace WpfSnake
 {
     class Snake
     {
-        bool elo = true;
-        int windowHeight = 350;
-        int windowWidth = 550;
+        int windowHeight = 550;
+        int windowWidth = 850;
         System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         public Snake(int sciany, int sleepTime, bool muzik)
         {
@@ -23,7 +22,7 @@ namespace WpfSnake
             this.sciany = sciany;
             this.muzik = muzik;
         }
-        enum kierunek : byte
+        public enum kierunek : byte
         {
             prawo = 0,
             lewo = 1,
@@ -31,8 +30,7 @@ namespace WpfSnake
             gora = 3
         };
         public bool muzik;
-
-        GameView wyswietl = new GameView();
+        GameView wyswietl = new GameView(true);
         Queue<Koordynaty> wonsz = new Queue<Koordynaty>();
         List<Koordynaty> przeszkody = new List<Koordynaty>();
         Random generator = new Random();
@@ -120,9 +118,23 @@ namespace WpfSnake
         int czas_usuniecia_jedzenia = 30000; // jak dłygo jedzenie pozostaje na planszy
         int punkty_ujemne = 0; // punkty ujemne za niezjedzone jesdzenie 
         int temp = 2;
-        public void Snake_Init()
+        public void snake_buttons(kierunek elo)
         {
-            
+            switch (elo)
+            {
+                case kierunek.lewo:
+                if (kierunek_poruszania != (int)kierunek.prawo) kierunek_poruszania = (int)kierunek.lewo;
+                    break;
+                case kierunek.prawo:   
+                if (kierunek_poruszania != (int)kierunek.lewo) kierunek_poruszania = (int)kierunek.prawo;
+                    break;
+                case kierunek.gora:
+                if (kierunek_poruszania != (int)kierunek.dol) kierunek_poruszania = (int)kierunek.gora;
+                    break;
+                case kierunek.dol:
+                if (kierunek_poruszania != (int)kierunek.gora) kierunek_poruszania = (int)kierunek.dol;
+                    break;
+        }
         }
         //public Key k2;
         public void snakeLoop()
@@ -158,26 +170,27 @@ namespace WpfSnake
                 //  {
                 //ConsoleKeyInfo kl = Console.ReadKey(false); // przerobić na switcha
                 //Key k1 = wyswietl.klawisz_mi_daj();
-                //App.Current.Dispatcher.BeginInvoke(new Action(() => { k2 = wyswietl.klawisz; }));
-                if (Keyboard.IsKeyDown(Key.Left))
+                //return App.Current.Dispatcher.BeginInvoke(new Action(() => { Keyboard.IsKeyDown(Key.P); }));
+                if (Keyboard.IsKeyToggled(Key.Left))
                     {
                     if (kierunek_poruszania != (int)kierunek.prawo) kierunek_poruszania = (int)kierunek.lewo;
                     }
-                else if (Keyboard.IsKeyDown(Key.Right))
+                else if (Keyboard.IsKeyToggled(Key.Right))
                 {
                     if (kierunek_poruszania != (int)kierunek.lewo) kierunek_poruszania = (int)kierunek.prawo;
                 }
-                if (Keyboard.IsKeyDown(Key.Up))
+                if (Keyboard.IsKeyToggled(Key.Up))
                 {
                     if (kierunek_poruszania != (int)kierunek.dol) kierunek_poruszania = (int)kierunek.gora;
                     
                 }
-                if (Keyboard.IsKeyDown(Key.Down))
+                if (Keyboard.IsKeyToggled(Key.Down))
                 {
                     if (kierunek_poruszania != (int)kierunek.gora) kierunek_poruszania = (int)kierunek.dol;
                 }
                 if (Keyboard.IsKeyDown(Key.P))
-                { pause(); }
+                { pause(); Thread.Sleep(500); }// bo mi sie kurwa 2 razy odpala pizda jebana;
+
                 Koordynaty aktualnaGlowa = wonsz.Last();
                 Koordynaty nowy_kierunek = tablica_skretow[kierunek_poruszania];
 
@@ -196,10 +209,10 @@ namespace WpfSnake
                     punkty = Math.Max(punkty, 0);
                     wyswietl.muzik = this.muzik;
                     player.Stop();
-                    if (elo == true) {
+                    //if (elo == true) {
                         App.Current.Dispatcher.BeginInvoke(new Action(() => { wyswietl.game_over(punkty, muzik); }));
-                        elo = false;
-                    }
+                      //  elo = false;
+                    //}
 
                     return;
                 }

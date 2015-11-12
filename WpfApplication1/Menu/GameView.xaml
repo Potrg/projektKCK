@@ -7,18 +7,18 @@
         xmlns:my="clr-namespace:WpfSnake"
         mc:Ignorable="d"
         Loaded="UserControl_Loaded"
-        Width="550" Height="350"
+        Width="850" Height="550"
         Keyboard.KeyDown="UserControl_KeyUp"
               Focusable="True"
              Name="panel">
-    <Canvas Background="Gray" Width="550" Height="350" Name="canvas">
-        <Label x:Name="scoreshow" Content="0" Canvas.Left="493" Width="57" Height="30" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+    <Canvas Background="Gray" Width="850" Height="550" Name="canvas">
+        <Label x:Name="scoreshow" Content="0" Canvas.Left="783" Width="67" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
         <Button Name="upbutton"
         Click="upbutton_Click"
         Background="Transparent"
         BorderBrush="Transparent"
         BorderThickness="0" 
-        Padding="-4" Canvas.Left="490" Canvas.Top="275" Height="39" Width="36" RenderTransformOrigin="0.5,0.5">
+        Padding="-4" Canvas.Left="783" Canvas.Top="464" Height="39" Width="36" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -43,7 +43,7 @@
         Background="Transparent"
         BorderBrush="Transparent"
         BorderThickness="0" 
-        Padding="-4" Canvas.Left="514" Canvas.Top="295" Height="39" Width="35" RenderTransformOrigin="0.5,0.5">
+        Padding="-4" Canvas.Left="807" Canvas.Top="478" Height="39" Width="35" RenderTransformOrigin="0.5,0.5">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -68,7 +68,7 @@
         Background="Transparent"
         BorderBrush="Transparent"
         BorderThickness="0" 
-        Padding="-4" Canvas.Left="489" Canvas.Top="295" Height="38" Width="45" RenderTransformOrigin="0.464,0.706">
+        Padding="-4" Canvas.Left="783" Canvas.Top="483" Height="38" Width="45" RenderTransformOrigin="0.464,0.706">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -93,13 +93,13 @@
         Background="Transparent"
         BorderBrush="Transparent"
         BorderThickness="0" 
-        Padding="-4" Canvas.Left="464" Canvas.Top="296" Height="40" Width="38" RenderTransformOrigin="0.5,0.5">
+        Padding="-4" Canvas.Left="760" Canvas.Top="480" Height="40" Width="38" RenderTransformOrigin="-4.436,7.803">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="269.108"/>
-                    <TranslateTransform/>
+                    <TranslateTransform X="482.575" Y="-109.123"/>
                 </TransformGroup>
             </Button.RenderTransform>
             <Image Source="C:\content\ilu.png" Height="36" Width="35" RenderTransformOrigin="0.5,0.5">

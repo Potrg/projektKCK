@@ -19,15 +19,15 @@ namespace WpfSnake.Menu
     {
         //Canvas canvas = new Canvas();
         internal bool muzik;
-        public GameView()
+        public GameView(bool muzik)
         {
+            this.muzik = muzik;
             InitializeComponent();
-            
         }
-        //Snake wonsz;
+        Snake wonsz;
         public int lvl, speed;
         public Key klucz = Key.None;
-        //Thread oThread;
+        Thread oThread;
         public GameView(int lvl, int speed, bool muzik)
         {
            // wonsz = new Snake(lvl, speed, muzik);
@@ -36,13 +36,12 @@ namespace WpfSnake.Menu
             this.lvl = lvl;
             InitializeComponent();
             usun_stara_glowe(new Koordynaty(10, 20));
-            //wonsz.Snake_Init();
-            //wonsz.snakeLoop();
-            // oThread = new Thread(wonsz.snakeLoop);
-            // oThread.SetApartmentState(ApartmentState.STA);
-            //oThread.Start();
-            //while (!oThread.IsAlive);
-            
+            wonsz = new Snake(lvl, speed, muzik);
+            oThread = new Thread(wonsz.snakeLoop);
+            oThread.SetApartmentState(ApartmentState.STA);
+            oThread.Start();
+            while (!oThread.IsAlive) ;
+
         }
 
         public void sciany(List<Koordynaty> przeszkody)
@@ -105,18 +104,18 @@ namespace WpfSnake.Menu
 
         internal void pauza()
         {
-            //oThread.Suspend();
+           // oThread.    
             MessageBoxResult result1 = MessageBox.Show("Gra jest wstrzymana, czy chesz kontynuować?", "PAUZA", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (result1 == MessageBoxResult.No)
             {
                 //odpal główne menu
                 //oThread.Abort();
-                Switcher.Switch(new MainMenu(muzik,false));
+                App.Current.Dispatcher.BeginInvoke(new Action(() => { Switcher.Switch(new MainMenu(muzik, false)); }));
             }
             else
             {
-               // oThread.Resume();
+                //oThread.Resume();
                 return;
             }
 
@@ -156,27 +155,22 @@ namespace WpfSnake.Menu
 
         private void Right_Click(object sender, RoutedEventArgs e)
         {
-
+            wonsz.snake_buttons(Snake.kierunek.prawo);
         }
 
         private void upbutton_Click(object sender, RoutedEventArgs e)
         {
-
+            wonsz.snake_buttons(Snake.kierunek.gora);
         }
 
         private void lefybutton_Click(object sender, RoutedEventArgs e)
         {
-
+            wonsz.snake_buttons(Snake.kierunek.lewo);
         }
 
         private void downbutton_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        public Key klawisz_mi_daj()
-        {
-            return klucz;
+            wonsz.snake_buttons(Snake.kierunek.dol);
         }
         // wyświetlanie
     }
